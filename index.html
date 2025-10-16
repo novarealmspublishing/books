@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Realms Publishing</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { margin: 0; padding: 0; overflow-x: hidden; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script>
+        const { useState } = React;
+        const { BookOpen, Sword, Mail, ChevronRight, Users } = lucide;
+        const h = React.createElement;
+
+        function NovaRealmsWebsite() {
+          const [currentPage, setCurrentPage] = useState('home');
+
+          const author = {
+            name: 'Liam Mercer',
+            bio: 'Liam Mercer has been obsessed with Arthurian legend since childhood, diving deep into every retelling, variant, and obscure medieval text he could find.'
+          };
+
+          // Simple navigation
+          const nav = h('nav', { 
+            className: 'bg-slate-900 border-b border-slate-800 sticky top-0 z-50',
+            style: { padding: '1rem' }
+          },
+            h('div', { style: { maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' } },
+              h('div', { 
+                style: { display: 'flex', alignItems: 'center', cursor: 'pointer' },
+                onClick: () => setCurrentPage('home')
+              },
+                h('span', { style: { color: 'white', fontSize: '1.5rem', fontWeight: 'bold' } }, 'Nova Realms Publishing')
+              ),
+              h('div', { style: { display: 'flex', gap: '1rem' } },
+                h('button', { onClick: () => setCurrentPage('home'), style: { color: '#93c5fd', background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem' } }, 'Home'),
+                h('button', { onClick: () => setCurrentPage('about'), style: { color: '#93c5fd', background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem' } }, 'About'),
+                h('button', { onClick: () => setCurrentPage('books'), style: { color: '#93c5fd', background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem' } }, 'Books'),
+                h('button', { onClick: () => setCurrentPage('contact'), style: { color: '#93c5fd', background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem' } }, 'Contact')
+              )
+            )
+          );
+
+          // Home page
+          const homePage = h('div', null,
+            h('div', { 
+              style: { 
+                background: 'linear-gradient(to bottom right, #0f172a, #164e63, #1e3a8a)',
+                padding: '6rem 2rem',
+                textAlign: 'center'
+              }
+            },
+              h('h1', { style: { color: 'white', fontSize: '4rem', fontWeight: 'bold', marginBottom: '1rem' } }, 'Nova Realms Publishing'),
+              h('p', { style: { color: '#a5f3fc', fontSize: '1.5rem', marginBottom: '2rem' } }, 'Diverse voices exploring every shade of fantasy'),
+              h('button', {
+                onClick: () => setCurrentPage('books'),
+                style: {
+                  background: 'linear-gradient(to right, #0891b2, #2563eb)',
+                  color: 'white',
+                  padding: '1rem 2rem',
+                  borderRadius: '0.5rem',
+                  border: 'none',
+                  fontSize: '1.125rem',
+                  fontWeight: '600',
+                  cursor: 'pointer'
+                }
+              }, 'Discover Our Books')
+            ),
+            h('div', { style: { maxWidth: '1200px', margin: '4rem auto', padding: '0 2rem' } },
+              h('h2', { style: { color: 'white', fontSize: '2rem', fontWeight: 'bold', textAlign: 'center', marginBottom: '3rem' } }, 'Featured Release'),
+              h('div', { style: { background: '#1e293b', borderRadius: '1rem', padding: '2rem', border: '1px solid #334155' } },
+                h('h3', { style: { color: 'white', fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' } }, 'The Reluctant Blade'),
+                h('p', { style: { color: '#fbbf24', marginBottom: '0.5rem', fontSize: '1.125rem' } }, 'by Liam Mercer'),
+                h('p', { style: { color: '#9ca3af', fontSize: '0.875rem', fontStyle: 'italic', marginBottom: '1rem' } }, 'The Hunter\'s Crown Chronicles #1'),
+                h('p', { style: { color: '#d1d5db', marginBottom: '1.5rem', lineHeight: '1.75' } }, 
+                  'Arthur is no king, just a skilled hunter battling dark creatures for the mysterious Faerie Queene. Haunted by dreams of destiny and urged by Merlin, he resists the path laid before him.'
+                ),
+                h('button', { style: { background: '#f59e0b', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '0.5rem', border: 'none', cursor: 'pointer', fontWeight: '600' } }, 'Buy Now')
+              )
+            )
+          );
+
+          // Books page
+          const booksPage = h('div', null,
+            h('div', { 
+              style: { 
+                background: 'linear-gradient(to bottom right, #0f172a, #164e63, #1e3a8a)',
+                padding: '4rem 2rem',
+                textAlign: 'center'
+              }
+            },
+              h('h1', { style: { color: 'white', fontSize: '3rem', fontWeight: 'bold', marginBottom: '1rem' } }, 'The Hunter\'s Crown Chronicles'),
+              h('p', { style: { color: '#a5f3fc', fontSize: '1.25rem' } }, 'A six-book sword and sorcery epic by Liam Mercer')
+            ),
+            h('div', { style: { maxWidth: '1200px', margin: '4rem auto', padding: '0 2rem', textAlign: 'center' } },
+              h('p', { style: { color: '#d1d5db', fontSize: '1.125rem' } }, 'Full catalog coming soon...')
+            )
+          );
+
+          // About page
+          const aboutPage = h('div', null,
+            h('div', { 
+              style: { 
+                background: 'linear-gradient(to bottom right, #0f172a, #164e63, #1e3a8a)',
+                padding: '4rem 2rem',
+                textAlign: 'center'
+              }
+            },
+              h('h1', { style: { color: 'white', fontSize: '3rem', fontWeight: 'bold' } }, 'About Nova Realms Publishing')
+            ),
+            h('div', { style: { maxWidth: '800px', margin: '4rem auto', padding: '0 2rem' } },
+              h('div', { style: { background: '#1e293b', borderRadius: '1rem', padding: '2rem', border: '1px solid #334155' } },
+                h('p', { style: { color: '#d1d5db', marginBottom: '1rem', lineHeight: '1.75' } }, 
+                  'Nova Realms Publishing champions diverse voices in fantasy fiction. We\'re launching with Liam Mercer\'s epic sword and sorcery series, The Hunter\'s Crown Chronicles.'
+                ),
+                h('p', { style: { color: '#d1d5db', lineHeight: '1.75' } }, 
+                  'We specialize exclusively in adult fantasy fiction and support neurodivergent creators using technology as an accessibility tool.'
+                )
+              )
+            )
+          );
+
+          // Contact page
+          const contactPage = h('div', null,
+            h('div', { 
+              style: { 
+                background: 'linear-gradient(to bottom right, #0f172a, #164e63, #1e3a8a)',
+                padding: '4rem 2rem',
+                textAlign: 'center'
+              }
+            },
+              h('h1', { style: { color: 'white', fontSize: '3rem', fontWeight: 'bold' } }, 'Contact Us')
+            ),
+            h('div', { style: { maxWidth: '800px', margin: '4rem auto', padding: '0 2rem' } },
+              h('div', { style: { background: '#1e293b', borderRadius: '1rem', padding: '2rem', border: '1px solid #334155' } },
+                h('p', { style: { color: '#d1d5db', fontSize: '1.125rem' } }, 'Email: info@novarealms.com')
+              )
+            )
+          );
+
+          // Footer
+          const footer = h('footer', { 
+            style: { 
+              background: '#020617',
+              borderTop: '1px solid #334155',
+              padding: '2rem',
+              marginTop: '4rem',
+              textAlign: 'center'
+            }
+          },
+            h('p', { style: { color: '#9ca3af', marginBottom: '0.5rem' } }, '© 2025 Nova Realms Publishing. All rights reserved.'),
+            h('p', { style: { color: '#9ca3af', fontSize: '0.875rem' } }, 'Diverse voices exploring every shade of fantasy')
+          );
+
+          // Main render
+          return h('div', { style: { minHeight: '100vh', background: '#020617' } },
+            nav,
+            currentPage === 'home' && homePage,
+            currentPage === 'books' && booksPage,
+            currentPage === 'about' && aboutPage,
+            currentPage === 'contact' && contactPage,
+            footer
+          );
+        }
+
+        ReactDOM.render(h(NovaRealmsWebsite), document.getElementById('root'));
+    </script>
+</body>
+</html>
