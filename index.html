@@ -17,7 +17,7 @@
     
     <script>
         const { useState } = React;
-        const { BookOpen, Sword, Mail, ChevronRight, Users } = lucide;
+        const { BookOpen, Sword, Mail, ChevronRight, Users, Star } = lucide;
         const h = React.createElement;
 
         function NovaRealmsWebsite() {
@@ -28,7 +28,35 @@
             bio: 'Liam Mercer has been obsessed with Arthurian legend since childhood, diving deep into every retelling, variant, and obscure medieval text he could find.'
           };
 
-          // Simple navigation
+          // ✅ NEW (ADD-ONLY): Books data used by the grid below
+          const books = [
+            { 
+              title: 'The Reluctant Blade', series: '#1',
+              blurb: 'Arthur is no king, just a skilled hunter battling dark creatures for the mysterious Faerie Queene. Haunted by dreams of destiny and urged by Merlin, he resists the path laid before him.'
+            },
+            { 
+              title: 'The Blood of Giants', series: '#2',
+              blurb: 'Called to aid a desperate giant, Culhwch, Arthur embarks on a treacherous quest through a land haunted by ancient magic and monstrous foes.'
+            },
+            { 
+              title: "The Dancer's Sword", series: '#3',
+              blurb: 'Arthur finds love with a fierce and enigmatic woman known as the Dancer—until betrayal shatters their fragile happiness.'
+            },
+            { 
+              title: 'The Usurper King', series: '#4',
+              blurb: "A usurper lurks in his homeland. To reclaim his birthright, Arthur must confront dark legacies and treacherous allies."
+            },
+            { 
+              title: 'The Tournament of Shadows', series: '#5',
+              blurb: 'As rival powers prepare for war, Arthur faces deadly challenges in a tournament where trust is scarce and honor is rarer.'
+            },
+            { 
+              title: 'The Shield of Kings', series: '#6',
+              blurb: 'The final battle looms as Arthur unites his allies to defend the realm against invading Saxons.'
+            }
+          ];
+
+          // Simple navigation (unchanged, except for Authors button already added)
           const nav = h('nav', { 
             className: 'bg-slate-900 border-b border-slate-800 sticky top-0 z-50',
             style: { padding: '1rem' }
@@ -50,7 +78,7 @@
             )
           );
 
-          // Home page
+          // Home page (unchanged)
           const homePage = h('div', null,
             h('div', { 
               style: { 
@@ -89,7 +117,7 @@
             )
           );
 
-          // Books page
+          // Books page (original content kept + NEW grid appended)
           const booksPage = h('div', null,
             h('div', { 
               style: { 
@@ -102,11 +130,68 @@
               h('p', { style: { color: '#a5f3fc', fontSize: '1.25rem' } }, 'A six-book sword and sorcery epic by Liam Mercer')
             ),
             h('div', { style: { maxWidth: '1200px', margin: '4rem auto', padding: '0 2rem', textAlign: 'center' } },
-              h('p', { style: { color: '#d1d5db', fontSize: '1.125rem' } }, 'Full catalog coming soon...')
+              h('p', { style: { color: '#d1d5db', fontSize: '1.125rem', marginBottom: '1.5rem' } }, 'Full catalog coming soon...')
+            ),
+
+            // ✅ NEW (ADD-ONLY): Books grid
+            h('div', { style: { maxWidth: '1200px', margin: '0 auto 4rem', padding: '0 2rem' } },
+              h('div', {
+                style: {
+                  display: 'grid',
+                  gridTemplateColumns:
+                    (typeof window !== 'undefined' && window.innerWidth >= 1024) ? 'repeat(3, 1fr)' :
+                    (typeof window !== 'undefined' && window.innerWidth >= 768) ? 'repeat(2, 1fr)' : '1fr',
+                  gap: '1rem'
+                }
+              },
+                books.map((bk, idx) =>
+                  h('div', {
+                    key: idx,
+                    style: {
+                      background: '#1e293b',
+                      border: '1px solid #334155',
+                      borderRadius: '0.75rem',
+                      overflow: 'hidden',
+                      transition: 'transform 0.2s'
+                    },
+                    onMouseOver: (e) => { e.currentTarget.style.transform = 'scale(1.02)'; },
+                    onMouseOut: (e) => { e.currentTarget.style.transform = 'scale(1)'; }
+                  },
+                    h('div', {
+                      style: {
+                        height: '12rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        background: 'linear-gradient(to bottom right, #0f172a, #78350f, #ea580c)'
+                      }
+                    },
+                      h(BookOpen, { style: { width: '4rem', height: '4rem', color: 'white' } })
+                    ),
+                    h('div', { style: { padding: '1rem' } },
+                      h('h3', { style: { color: 'white', fontWeight: 'bold', fontSize: '1.125rem', marginBottom: '0.25rem' } }, bk.title),
+                      h('p', { style: { color: '#9ca3af', fontStyle: 'italic', marginBottom: '0.5rem', fontSize: '0.875rem' } }, "The Hunter's Crown Chronicles " + bk.series),
+                      h('p', { style: { color: '#d1d5db', marginBottom: '0.75rem', lineHeight: '1.6' } }, bk.blurb),
+                      h('button', {
+                        style: {
+                          width: '100%',
+                          background: '#f59e0b',
+                          color: 'white',
+                          border: 'none',
+                          padding: '0.5rem',
+                          borderRadius: '0.5rem',
+                          fontWeight: '600',
+                          cursor: 'pointer'
+                        }
+                      }, 'View Details')
+                    )
+                  )
+                )
+              )
             )
           );
 
-          // Authors page
+          // ✅ NEW earlier (ADD-ONLY): Authors page
           const authorsPage = h('div', null,
             h('div', { 
               style: { 
@@ -129,7 +214,7 @@
             )
           );
 
-          // About page
+          // About page (unchanged)
           const aboutPage = h('div', null,
             h('div', { 
               style: { 
@@ -152,7 +237,7 @@
             )
           );
 
-          // Contact page
+          // Contact page (unchanged)
           const contactPage = h('div', null,
             h('div', { 
               style: { 
@@ -170,7 +255,7 @@
             )
           );
 
-          // Footer
+          // Footer (unchanged)
           const footer = h('footer', { 
             style: { 
               background: '#020617',
@@ -184,7 +269,7 @@
             h('p', { style: { color: '#9ca3af', fontSize: '0.875rem' } }, 'Diverse voices exploring every shade of fantasy')
           );
 
-          // Main render
+          // Main render (unchanged except for authorsPage + books grid being referenced)
           return h('div', { style: { minHeight: '100vh', background: '#020617' } },
             nav,
             currentPage === 'home' && homePage,
