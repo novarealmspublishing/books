@@ -14,721 +14,828 @@
 <script>
     const { useState } = React;
     const h = React.createElement;
+// Custom icon components (replacing Lucide)
+const BookOpen = (props) => h('svg', { 
+    xmlns: 'http://www.w3.org/2000/svg', 
+    width: props.style?.width || '24', 
+    height: props.style?.height || '24', 
+    viewBox: '0 0 24 24', 
+    fill: 'none', 
+    stroke: 'currentColor', 
+    strokeWidth: '2', 
+    strokeLinecap: 'round', 
+    strokeLinejoin: 'round',
+    style: props.style,
+    className: props.className
+},
+    h('path', { d: 'M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z' }),
+    h('path', { d: 'M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z' })
+);
 
-    // Custom icon components (replacing Lucide)
-    const BookOpen = (props) => h('svg', { 
-        xmlns: 'http://www.w3.org/2000/svg', 
-        width: props.style?.width || '24', 
-        height: props.style?.height || '24', 
-        viewBox: '0 0 24 24', 
-        fill: 'none', 
-        stroke: 'currentColor', 
-        strokeWidth: '2', 
-        strokeLinecap: 'round', 
-        strokeLinejoin: 'round',
-        style: props.style,
-        className: props.className
-    },
-        h('path', { d: 'M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z' }),
-        h('path', { d: 'M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z' })
-    );
-    
-    const Sword = (props) => h('svg', {
-        xmlns: 'http://www.w3.org/2000/svg',
-        width: props.style?.width || '24',
-        height: props.style?.height || '24',
-        viewBox: '0 0 24 24',
-        fill: 'none',
-        stroke: 'currentColor',
-        strokeWidth: '2',
-        strokeLinecap: 'round',
-        strokeLinejoin: 'round',
-        style: props.style,
-        className: props.className
-    },
-        h('polyline', { points: '14.5 17.5 3 6 3 3 6 3 17.5 14.5' }),
-        h('line', { x1: '13', y1: '19', x2: '19', y2: '13' }),
-        h('line', { x1: '16', y1: '16', x2: '20', y2: '20' }),
-        h('line', { x1: '19', y1: '21', x2: '21', y2: '19' })
-    );
+const Sword = (props) => h('svg', {
+    xmlns: 'http://www.w3.org/2000/svg',
+    width: props.style?.width || '24',
+    height: props.style?.height || '24',
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: '2',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+    style: props.style,
+    className: props.className
+},
+    h('polyline', { points: '14.5 17.5 3 6 3 3 6 3 17.5 14.5' }),
+    h('line', { x1: '13', y1: '19', x2: '19', y2: '13' }),
+    h('line', { x1: '16', y1: '16', x2: '20', y2: '20' }),
+    h('line', { x1: '19', y1: '21', x2: '21', y2: '19' })
+);
 
-    const Mail = (props) => h('svg', {
-        xmlns: 'http://www.w3.org/2000/svg',
-        width: props.style?.width || '24',
-        height: props.style?.height || '24',
-        viewBox: '0 0 24 24',
-        fill: 'none',
-        stroke: 'currentColor',
-        strokeWidth: '2',
-        strokeLinecap: 'round',
-        strokeLinejoin: 'round',
-        style: props.style,
-        className: props.className
-    },
-        h('rect', { width: '20', height: '16', x: '2', y: '4', rx: '2' }),
-        h('path', { d: 'm22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7' })
-    );
+const Mail = (props) => h('svg', {
+    xmlns: 'http://www.w3.org/2000/svg',
+    width: props.style?.width || '24',
+    height: props.style?.height || '24',
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: '2',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+    style: props.style,
+    className: props.className
+},
+    h('rect', { width: '20', height: '16', x: '2', y: '4', rx: '2' }),
+    h('path', { d: 'm22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7' })
+);
 
-    const Menu = (props) => h('svg', {
-        xmlns: 'http://www.w3.org/2000/svg',
-        width: props.style?.width || '24',
-        height: props.style?.height || '24',
-        viewBox: '0 0 24 24',
-        fill: 'none',
-        stroke: 'currentColor',
-        strokeWidth: '2',
-        strokeLinecap: 'round',
-        strokeLinejoin: 'round',
-        style: props.style,
-        className: props.className
-    },
-        h('line', { x1: '4', x2: '20', y1: '12', y2: '12' }),
-        h('line', { x1: '4', x2: '20', y1: '6', y2: '6' }),
-        h('line', { x1: '4', x2: '20', y1: '18', y2: '18' })
-    );
+const Menu = (props) => h('svg', {
+    xmlns: 'http://www.w3.org/2000/svg',
+    width: props.style?.width || '24',
+    height: props.style?.height || '24',
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: '2',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+    style: props.style,
+    className: props.className
+},
+    h('line', { x1: '4', x2: '20', y1: '12', y2: '12' }),
+    h('line', { x1: '4', x2: '20', y1: '6', y2: '6' }),
+    h('line', { x1: '4', x2: '20', y1: '18', y2: '18' })
+);
 
-    const X = (props) => h('svg', {
-        xmlns: 'http://www.w3.org/2000/svg',
-        width: props.style?.width || '24',
-        height: props.style?.height || '24',
-        viewBox: '0 0 24 24',
-        fill: 'none',
-        stroke: 'currentColor',
-        strokeWidth: '2',
-        strokeLinecap: 'round',
-        strokeLinejoin: 'round',
-        style: props.style,
-        className: props.className
-    },
-        h('path', { d: 'M18 6 6 18' }),
-        h('path', { d: 'm6 6 12 12' })
-    );
+const X = (props) => h('svg', {
+    xmlns: 'http://www.w3.org/2000/svg',
+    width: props.style?.width || '24',
+    height: props.style?.height || '24',
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: '2',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+    style: props.style,
+    className: props.className
+},
+    h('path', { d: 'M18 6 6 18' }),
+    h('path', { d: 'm6 6 12 12' })
+);
 
-    const ChevronRight = (props) => h('svg', {
-        xmlns: 'http://www.w3.org/2000/svg',
-        width: props.style?.width || '24',
-        height: props.style?.height || '24',
-        viewBox: '0 0 24 24',
-        fill: 'none',
-        stroke: 'currentColor',
-        strokeWidth: '2',
-        strokeLinecap: 'round',
-        strokeLinejoin: 'round',
-        style: props.style,
-        className: props.className
-    },
-        h('path', { d: 'm9 18 6-6-6-6' })
-    );
+const ChevronRight = (props) => h('svg', {
+    xmlns: 'http://www.w3.org/2000/svg',
+    width: props.style?.width || '24',
+    height: props.style?.height || '24',
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: '2',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+    style: props.style,
+    className: props.className
+},
+    h('path', { d: 'm9 18 6-6-6-6' })
+);
 
-    const Users = (props) => h('svg', {
-        xmlns: 'http://www.w3.org/2000/svg',
-        width: props.style?.width || '24',
-        height: props.style?.height || '24',
-        viewBox: '0 0 24 24',
-        fill: 'none',
-        stroke: 'currentColor',
-        strokeWidth: '2',
-        strokeLinecap: 'round',
-        strokeLinejoin: 'round',
-        style: props.style,
-        className: props.className
-    },
-        h('path', { d: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2' }),
-        h('circle', { cx: '9', cy: '7', r: '4' }),
-        h('path', { d: 'M22 21v-2a4 4 0 0 0-3-3.87' }),
-        h('path', { d: 'M16 3.13a4 4 0 0 1 0 7.75' })
-    );
+const Users = (props) => h('svg', {
+    xmlns: 'http://www.w3.org/2000/svg',
+    width: props.style?.width || '24',
+    height: props.style?.height || '24',
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: '2',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+    style: props.style,
+    className: props.className
+},
+    h('path', { d: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2' }),
+    h('circle', { cx: '9', cy: '7', r: '4' }),
+    h('path', { d: 'M22 21v-2a4 4 0 0 0-3-3.87' }),
+    h('path', { d: 'M16 3.13a4 4 0 0 1 0 7.75' })
+);
 
-    const Shield = (props) => h('svg', {
-        xmlns: 'http://www.w3.org/2000/svg',
-        width: props.style?.width || '24',
-        height: props.style?.height || '24',
-        viewBox: '0 0 24 24',
-        fill: 'none',
-        stroke: 'currentColor',
-        strokeWidth: '2',
-        strokeLinecap: 'round',
-        strokeLinejoin: 'round',
-        style: props.style,
-        className: props.className
-    },
-        h('path', { d: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z' })
-    );
+const Shield = (props) => h('svg', {
+    xmlns: 'http://www.w3.org/2000/svg',
+    width: props.style?.width || '24',
+    height: props.style?.height || '24',
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: '2',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+    style: props.style,
+    className: props.className
+},
+    h('path', { d: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z' })
+);
 
-    const MessageSquare = (props) => h('svg', {
-        xmlns: 'http://www.w3.org/2000/svg',
-        width: props.style?.width || '24',
-        height: props.style?.height || '24',
-        viewBox: '0 0 24 24',
-        fill: 'none',
-        stroke: 'currentColor',
-        strokeWidth: '2',
-        strokeLinecap: 'round',
-        strokeLinejoin: 'round',
-        style: props.style,
-        className: props.className
-    },
-        h('path', { d: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z' })
-    );
+const MessageSquare = (props) => h('svg', {
+    xmlns: 'http://www.w3.org/2000/svg',
+    width: props.style?.width || '24',
+    height: props.style?.height || '24',
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: '2',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+    style: props.style,
+    className: props.className
+},
+    h('path', { d: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z' })
+);
 
-    const Star = (props) => h('svg', {
-        xmlns: 'http://www.w3.org/2000/svg',
-        width: props.style?.width || '24',
-        height: props.style?.height || '24',
-        viewBox: '0 0 24 24',
-        fill: props.style?.fill || 'currentColor',
-        stroke: 'currentColor',
-        strokeWidth: '2',
-        strokeLinecap: 'round',
-        strokeLinejoin: 'round',
-        style: props.style,
-        className: props.className
-    },
-        h('polygon', { points: '12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2' })
-    );
+const Star = (props) => h('svg', {
+    xmlns: 'http://www.w3.org/2000/svg',
+    width: props.style?.width || '24',
+    height: props.style?.height || '24',
+    viewBox: '0 0 24 24',
+    fill: props.style?.fill || 'currentColor',
+    stroke: 'currentColor',
+    strokeWidth: '2',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+    style: props.style,
+    className: props.className
+},
+    h('polygon', { points: '12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2' })
+);
 
-    function NovaRealmsWebsite() {
-      const [currentPage, setCurrentPage] = useState('home');
-      const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+function NovaRealmsWebsite() {
+  const [currentPage, setCurrentPage] = useState('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-      const author = {
-        id: 'mercer',
-        name: 'Liam Mercer',
-        genre: 'Sword & Sorcery',
-        tagline: 'Steel, sorcery, and adventure',
-        bio: 'Liam Mercer has been obsessed with Arthurian legend since childhood, diving deep into every retelling, variant, and obscure medieval text he could find. That special interest became The Hunter\'s Crown Chronicles, a six-book series that strips away the courtly romance to reveal the gritty, violent, monster-hunting reality beneath the myth. Liam writes fast-paced sword and sorcery filled with clever protagonists, dangerous magic, and the kind of action that comes from truly understanding what makes these stories timeless. For Liam, Arthur isn\'t a distant king, he\'s a hunter who earned his legend one bloody fight at a time.',
-        books: [
-          { 
-            title: 'The Reluctant Blade', 
-            series: '#1', 
-            blurb: 'Arthur is no king, just a skilled hunter battling dark creatures for the mysterious Faerie Queene. Haunted by dreams of destiny and urged by Merlin, he resists the path laid before him. When his sword is stolen and allies emerge from the shadows, Arthur must decide if he will embrace his fate or remain a reluctant blade in a world on the brink of war.'
-          },
-          { 
-            title: 'The Blood of Giants', 
-            series: '#2', 
-            blurb: 'Called to aid a desperate giant, Culhwch, Arthur embarks on a treacherous quest through a land haunted by ancient magic and monstrous foes. As tasks meant for heroes unfold, Arthur discovers that love, loyalty, and lineage are far more complex than any battle, and his own destiny becomes further entwined with the fate of giants and mortals alike.'
-          },
-          { 
-            title: 'The Dancer\'s Sword', 
-            series: '#3', 
-            blurb: 'Amid joyous fights against darkness, Arthur finds love with a fierce and enigmatic woman known as the Dancer. But when betrayal shatters their fragile happiness, and Ranger falls to enemy blades, Arthur is plunged into grief and vengeance. The path to kingship demands sacrifice, but what price will he pay when the sword is no longer just a weapon?'
-          },
-          { 
-            title: 'The Usurper King', 
-            series: '#4', 
-            blurb: 'Arthur\'s relentless service to the Faerie Queene sharpens his skills, but a usurper lurks in his homeland, a mad lord claiming the throne by blood and blade. To save those he loves and reclaim his birthright, Arthur must confront dark legacies and treacherous allies. The true battle for the kingdom begins within the shadows of power.'
-          },
-          { 
-            title: 'The Tournament of Shadows', 
-            series: '#5', 
-            blurb: 'As rival powers prepare for war, Arthur faces deadly challenges in a tournament where trust is as scarce as honor. Broken swords and fractured alliances test his resolve. With old friends returning and the threat of betrayal looming, Arthur must rally his fractured forces or watch the kingdom slip into chaos.'
-          },
-          { 
-            title: 'The Shield of Kings', 
-            series: '#6', 
-            blurb: 'The final battle looms as Arthur unites his allies to defend the realm against invading Saxons. With shattered swords reforged and kingdoms at stake, he must wield strength and mercy alike. Victory will crown a true king, but only if Arthur can protect what he has fought so hard to build. The legend of Camelot begins here.'
-          }
-        ]
-      };
-
-      const comingSoonAuthors = [
-        { name: 'Charlotte Blake', genre: 'Urban Fantasy', tagline: 'Where city lights hide ancient magic' },
-        { name: 'L.K. Ashfield', genre: 'Epic Fantasy', tagline: 'Epic tales of kingdoms and destiny' },
-        { name: 'Harper Vaughn', genre: 'Dark Fantasy', tagline: 'Where heroes fall and shadows reign' }
-      ];
-
-      const navigateTo = (page) => {
-        setCurrentPage(page);
-        setMobileMenuOpen(false);
-        window.scrollTo(0, 0);
-      };
-
-      // Navigation
-      const nav = h('nav', { 
-        className: 'bg-slate-900 border-b border-slate-800 sticky top-0 z-50',
-        style: { backdropFilter: 'blur(8px)', backgroundColor: 'rgba(15, 23, 42, 0.95)' }
+  const author = {
+    id: 'mercer',
+    name: 'Liam Mercer',
+    genre: 'Sword & Sorcery',
+    tagline: 'Steel, sorcery, and adventure',
+    bio: 'Liam Mercer has been obsessed with Arthurian legend since childhood, diving deep into every retelling, variant, and obscure medieval text he could find. That special interest became The Hunter\'s Crown Chronicles, a six-book series that strips away the courtly romance to reveal the gritty, violent, monster-hunting reality beneath the myth. Liam writes fast-paced sword and sorcery filled with clever protagonists, dangerous magic, and the kind of action that comes from truly understanding what makes these stories timeless. For Liam, Arthur isn\'t a distant king, he\'s a hunter who earned his legend one bloody fight at a time.',
+    books: [
+      { 
+        title: 'The Reluctant Blade',
+        series: '#1',
+        image: 'reluctant-blade.jpg',
+        blurb: 'Arthur is no king, just a skilled hunter battling dark creatures for the mysterious Faerie Queene. Haunted by dreams of destiny and urged by Merlin, he resists the path laid before him. When his sword is stolen and allies emerge from the shadows, Arthur must decide if he will embrace his fate or remain a reluctant blade in a world on the brink of war.'
       },
-        h('div', { style: { maxWidth: '1280px', margin: '0 auto', padding: '0 1rem' } },
-          h('div', { style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '64px' } },
-            h('div', { 
-              style: { display: 'flex', alignItems: 'center', cursor: 'pointer' },
-              onClick: () => navigateTo('home')
-            },
-              h('div', { 
-                style: { 
-                  background: 'linear-gradient(to right, #06b6d4, #3b82f6, #6366f1)',
-                  padding: '0.5rem',
-                  borderRadius: '0.5rem'
-                }
-              },
-                h(BookOpen, { className: 'h-6 w-6 text-white', style: { width: '24px', height: '24px' } })
-              ),
-              h('span', { style: { marginLeft: '0.75rem', fontSize: '1.25rem', fontWeight: 'bold', color: 'white' } }, 'Nova Realms Publishing')
-            ),
-            
-            h('div', { className: 'hidden md:block', style: { display: window.innerWidth >= 768 ? 'block' : 'none' } },
-              h('div', { style: { display: 'flex', alignItems: 'center', gap: '1rem' } },
-                ['home', 'about', 'authors', 'books', 'newsletter', 'contact'].map(page =>
-                  h('button', {
-                    key: page,
-                    onClick: () => navigateTo(page),
-                    style: {
-                      color: '#d1d5db',
-                      padding: '0.5rem 0.75rem',
-                      fontSize: '0.875rem',
-                      fontWeight: '500',
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      transition: 'color 0.2s'
-                    },
-                    onMouseOver: (e) => e.target.style.color = '#22d3ee',
-                    onMouseOut: (e) => e.target.style.color = '#d1d5db'
-                  }, page.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '))
-                )
-              )
-            ),
-            
-            h('div', { className: 'md:hidden', style: { display: window.innerWidth < 768 ? 'block' : 'none' } },
-              h('button', {
-                onClick: () => setMobileMenuOpen(!mobileMenuOpen),
-                style: { color: '#d1d5db', background: 'none', border: 'none', cursor: 'pointer' }
-              },
-                mobileMenuOpen ? h(X, { className: 'h-6 w-6' }) : h(Menu, { className: 'h-6 w-6' })
-              )
-            )
-          )
+      { 
+        title: 'The Blood of Giants',
+        series: '#2',
+        image: 'blood-of-giants.jpg',
+        blurb: 'Called to aid a desperate giant, Culhwch, Arthur embarks on a treacherous quest through a land haunted by ancient magic and monstrous foes. As tasks meant for heroes unfold, Arthur discovers that love, loyalty, and lineage are far more complex than any battle, and his own destiny becomes further entwined with the fate of giants and mortals alike.'
+      },
+      { 
+        title: 'The Dancer\'s Sword',
+        series: '#3',
+        image: 'dancers-sword.jpg',
+        blurb: 'Amid joyous fights against darkness, Arthur finds love with a fierce and enigmatic woman known as the Dancer. But when betrayal shatters their fragile happiness, and Ranger falls to enemy blades, Arthur is plunged into grief and vengeance. The path to kingship demands sacrifice, but what price will he pay when the sword is no longer just a weapon?'
+      },
+      { 
+        title: 'The Usurper King',
+        series: '#4',
+        image: 'usurper-king.jpg',
+        blurb: 'Arthur\'s relentless service to the Faerie Queene sharpens his skills, but a usurper lurks in his homeland, a mad lord claiming the throne by blood and blade. To save those he loves and reclaim his birthright, Arthur must confront dark legacies and treacherous allies. The true battle for the kingdom begins within the shadows of power.'
+      },
+      { 
+        title: 'The Tournament of Shadows',
+        series: '#5',
+        image: 'tournament-shadows.jpg',
+        blurb: 'As rival powers prepare for war, Arthur faces deadly challenges in a tournament where trust is as scarce as honor. Broken swords and fractured alliances test his resolve. With old friends returning and the threat of betrayal looming, Arthur must rally his fractured forces or watch the kingdom slip into chaos.'
+      },
+      { 
+        title: 'The Shield of Kings',
+        series: '#6',
+        image: 'shield-of-kings.jpg',
+        blurb: 'The final battle looms as Arthur unites his allies to defend the realm against invading Saxons. With shattered swords reforged and kingdoms at stake, he must wield strength and mercy alike. Victory will crown a true king, but only if Arthur can protect what he has fought so hard to build. The legend of Camelot begins here.'
+      }
+    ]
+  };
+
+  const comingSoonAuthors = [
+    { name: 'Charlotte Blake', genre: 'Urban Fantasy', tagline: 'Where city lights hide ancient magic' },
+    { name: 'L.K. Ashfield', genre: 'Epic Fantasy', tagline: 'Epic tales of kingdoms and destiny' },
+    { name: 'Harper Vaughn', genre: 'Dark Fantasy', tagline: 'Where heroes fall and shadows reign' }
+  ];
+
+  const navigateTo = (page) => {
+    setCurrentPage(page);
+    setMobileMenuOpen(false);
+    window.scrollTo(0, 0);
+  };
+
+  // Navigation
+  const nav = h('nav', { 
+    className: 'bg-slate-900 border-b border-slate-800 sticky top-0 z-50',
+    style: { backdropFilter: 'blur(8px)', backgroundColor: 'rgba(15, 23, 42, 0.95)' }
+  },
+    h('div', { style: { maxWidth: '1280px', margin: '0 auto', padding: '0 1rem' } },
+      h('div', { style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '64px' } },
+        h('div', { 
+          style: { display: 'flex', alignItems: 'center', cursor: 'pointer' },
+          onClick: () => navigateTo('home')
+        },
+          h('div', { 
+            style: { 
+              background: 'linear-gradient(to right, #06b6d4, #3b82f6, #6366f1)',
+              padding: '0.5rem',
+              borderRadius: '0.5rem'
+            }
+          },
+            h(BookOpen, { className: 'h-6 w-6 text-white', style: { width: '24px', height: '24px' } })
+          ),
+          h('span', { style: { marginLeft: '0.75rem', fontSize: '1.25rem', fontWeight: 'bold', color: 'white' } }, 'Nova Realms Publishing')
         ),
         
-        mobileMenuOpen && h('div', { className: 'md:hidden', style: { backgroundColor: 'rgba(30, 41, 59, 0.95)', backdropFilter: 'blur(8px)' } },
-          h('div', { style: { padding: '0.5rem 0.5rem 0.75rem' } },
+        h('div', { className: 'hidden md:block', style: { display: window.innerWidth >= 768 ? 'block' : 'none' } },
+          h('div', { style: { display: 'flex', alignItems: 'center', gap: '1rem' } },
             ['home', 'about', 'authors', 'books', 'newsletter', 'contact'].map(page =>
               h('button', {
                 key: page,
                 onClick: () => navigateTo(page),
                 style: {
                   color: '#d1d5db',
-                  display: 'block',
-                  width: '100%',
-                  textAlign: 'left',
                   padding: '0.5rem 0.75rem',
-                  fontSize: '1rem',
+                  fontSize: '0.875rem',
                   fontWeight: '500',
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
-                  borderRadius: '0.375rem'
+                  transition: 'color 0.2s'
                 },
-                onMouseOver: (e) => e.target.style.color = 'white',
+                onMouseOver: (e) => e.target.style.color = '#22d3ee',
                 onMouseOut: (e) => e.target.style.color = '#d1d5db'
               }, page.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '))
             )
           )
-        )
-      );
-
-      // Footer
-      const footer = h('footer', { 
-        style: { 
-          background: '#020617',
-          borderTop: '1px solid #334155',
-          padding: '2rem',
-          marginTop: '4rem'
-        }
-      },
-        h('div', { style: { maxWidth: '1280px', margin: '0 auto', textAlign: 'center' } },
-          h('p', { style: { color: '#9ca3af', marginBottom: '0.5rem' } }, '© 2025 Nova Realms Publishing. All rights reserved.'),
-          h('p', { style: { color: '#9ca3af', fontSize: '0.875rem' } }, 'Diverse voices exploring every shade of fantasy')
-        )
-      );
-
-      // HOME PAGE
-      const homePage = h('div', null,
-        h('div', { 
-          style: { 
-            position: 'relative',
-            background: 'linear-gradient(to bottom right, #0f172a, #164e63, #1e3a8a)',
-            overflow: 'hidden'
-          }
-        },
-          h('div', { 
-            style: { 
-              position: 'relative',
-              maxWidth: '1280px',
-              margin: '0 auto',
-              padding: '6rem 1rem',
-              textAlign: 'center'
-            }
-          },
-            h('h1', { style: { fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 'bold', color: 'white', marginBottom: '1.5rem', letterSpacing: '-0.025em' } }, 'Nova Realms Publishing'),
-            h('p', { style: { fontSize: 'clamp(1.25rem, 2.5vw, 1.5rem)', color: '#a5f3fc', marginBottom: '2rem' } }, 'Diverse voices exploring every shade of fantasy'),
-            h('button', {
-              onClick: () => navigateTo('books'),
-              style: {
-                background: 'linear-gradient(to right, #0891b2, #2563eb)',
-                color: 'white',
-                fontWeight: '600',
-                padding: '0.75rem 2rem',
-                borderRadius: '0.5rem',
-                border: 'none',
-                fontSize: '1rem',
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                boxShadow: '0 10px 15px -3px rgba(6, 182, 212, 0.3)',
-                transition: 'all 0.3s'
-              },
-              onMouseOver: (e) => {
-                e.target.style.transform = 'scale(1.05)';
-                e.target.style.background = 'linear-gradient(to right, #06b6d4, #3b82f6)';
-              },
-              onMouseOut: (e) => {
-                e.target.style.transform = 'scale(1)';
-                e.target.style.background = 'linear-gradient(to right, #0891b2, #2563eb)';
-              }
-            }, 
-              'Discover Our Books',
-              h(ChevronRight, { style: { width: '20px', height: '20px' } })
-            )
-          )
         ),
         
-        h('div', { style: { maxWidth: '1280px', margin: '0 auto', padding: '4rem 1rem' } },
-          h('div', { style: { textAlign: 'center', marginBottom: '3rem' } },
-            h('h2', { style: { fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 'Featured Release'),
-            h('div', { style: { width: '5rem', height: '0.25rem', background: 'linear-gradient(to right, #06b6d4, #3b82f6)', margin: '0 auto' } })
-          ),
-          
-          h('div', { 
-            style: { 
-              background: '#1e293b',
-              borderRadius: '0.75rem',
-              overflow: 'hidden',
-              boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5)',
-              border: '1px solid #334155',
-              transition: 'border-color 0.3s'
-            },
-            onMouseOver: (e) => e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.5)',
-            onMouseOut: (e) => e.currentTarget.style.borderColor = '#334155'
+        h('div', { className: 'md:hidden', style: { display: window.innerWidth < 768 ? 'block' : 'none' } },
+          h('button', {
+            onClick: () => setMobileMenuOpen(!mobileMenuOpen),
+            style: { color: '#d1d5db', background: 'none', border: 'none', cursor: 'pointer' }
           },
-            h('div', { style: { display: 'flex', flexDirection: window.innerWidth >= 768 ? 'row' : 'column' } },
-              h('div', { 
-                style: { 
-                  width: window.innerWidth >= 768 ? '33.333%' : '100%',
-                  background: 'linear-gradient(to bottom right, #0f172a, #78350f, #ea580c)',
-                  padding: '3rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }
-              },
-                h('div', { style: { textAlign: 'center' } },
-                  h(Sword, { style: { width: '8rem', height: '8rem', color: 'white', margin: '0 auto 1rem' } }),
-                  h('div', { style: { color: 'white', fontSize: '1.5rem', fontWeight: 'bold' } }, 'The Reluctant Blade')
-                )
-              ),
-              h('div', { style: { width: window.innerWidth >= 768 ? '66.667%' : '100%', padding: '2rem' } },
-                h('div', { style: { display: 'flex', alignItems: 'center', marginBottom: '1rem' } },
-                  [1,2,3,4,5].map(i => h(Star, { key: i, style: { width: '1.25rem', height: '1.25rem', color: '#fbbf24', fill: '#fbbf24', marginLeft: i > 1 ? '0.25rem' : 0 } })),
-                  h('span', { style: { marginLeft: '0.5rem', color: '#9ca3af' } }, 'New Release')
-                ),
-                h('h3', { style: { fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' } }, 'The Reluctant Blade'),
-                h('p', { style: { color: '#fbbf24', marginBottom: '0.5rem' } }, 'by Liam Mercer'),
-                h('p', { style: { color: '#9ca3af', fontSize: '0.875rem', fontStyle: 'italic', marginBottom: '1rem' } }, 'The Hunter\'s Crown Chronicles #1'),
-                h('p', { style: { color: '#d1d5db', marginBottom: '1.5rem', lineHeight: '1.75' } }, 
-                  'Arthur is no king, just a skilled hunter battling dark creatures for the mysterious Faerie Queene. Haunted by dreams of destiny and urged by Merlin, he resists the path laid before him. When his sword is stolen and allies emerge from the shadows, Arthur must decide if he will embrace his fate or remain a reluctant blade in a world on the brink of war.'
-                ),
-                h('div', { style: { display: 'flex', flexWrap: 'wrap', gap: '1rem' } },
-                  h('button', { 
-                    style: { 
-                      background: '#f59e0b',
-                      color: 'white',
-                      padding: '0.5rem 1.5rem',
-                      borderRadius: '0.5rem',
-                      border: 'none',
-                      cursor: 'pointer',
-                      transition: 'background 0.2s'
-                    },
-                    onMouseOver: (e) => e.target.style.background = '#d97706',
-                    onMouseOut: (e) => e.target.style.background = '#f59e0b'
-                  }, 'Buy Now'),
-                  h('button', { 
-                    onClick: () => navigateTo('authors'),
-                    style: { 
-                      border: '1px solid #f59e0b',
-                      color: '#fbbf24',
-                      background: 'transparent',
-                      padding: '0.5rem 1.5rem',
-                      borderRadius: '0.5rem',
-                      cursor: 'pointer',
-                      transition: 'all 0.2s'
-                    },
-                    onMouseOver: (e) => {
-                      e.target.style.background = '#f59e0b';
-                      e.target.style.color = 'white';
-                    },
-                    onMouseOut: (e) => {
-                      e.target.style.background = 'transparent';
-                      e.target.style.color = '#fbbf24';
-                    }
-                  }, 'Learn More')
-                )
-              )
-            )
-          ),
-          
-          h('div', { style: { marginTop: '5rem' } },
-            h('div', { style: { textAlign: 'center', marginBottom: '3rem' } },
-              h('h2', { style: { fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 'Our Featured Author'),
-              h('div', { style: { width: '5rem', height: '0.25rem', background: 'linear-gradient(to right, #06b6d4, #3b82f6)', margin: '0 auto 0.75rem' } }),
-              h('p', { style: { color: '#9ca3af' } }, 'Launching with epic sword and sorcery adventure')
-            ),
-            
-            h('div', { style: { maxWidth: '48rem', margin: '0 auto 4rem' } },
-              h('div', { 
-                onClick: () => navigateTo('authors'),
-                style: { 
-                  background: '#1e293b',
-                  borderRadius: '0.75rem',
-                  padding: '2rem',
-                  border: '1px solid #334155',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s'
-                },
-                onMouseOver: (e) => {
-                  e.currentTarget.style.borderColor = '#f59e0b';
-                  e.currentTarget.style.transform = 'scale(1.02)';
-                },
-                onMouseOut: (e) => {
-                  e.currentTarget.style.borderColor = '#334155';
-                  e.currentTarget.style.transform = 'scale(1)';
-                }
-              },
-                h('div', { style: { display: 'flex', alignItems: 'center', gap: '1.5rem', flexDirection: window.innerWidth >= 640 ? 'row' : 'column', textAlign: window.innerWidth >= 640 ? 'left' : 'center' } },
-                  h('div', { 
-                    style: { 
-                      width: '8rem',
-                      height: '8rem',
-                      borderRadius: '50%',
-                      background: 'linear-gradient(to bottom right, #ea580c, #f59e0b, #fbbf24)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
-                      transition: 'transform 0.3s'
-                    }
-                  },
-                    h(Sword, { style: { width: '4rem', height: '4rem', color: 'white' } })
-                  ),
-                  h('div', { style: { flex: 1 } },
-                    h('h3', { style: { fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' } }, 'Liam Mercer'),
-                    h('p', { style: { color: '#fbbf24', marginBottom: '0.5rem', fontWeight: '600' } }, 'Sword & Sorcery'),
-                    h('p', { style: { color: '#9ca3af', fontSize: '0.875rem', fontStyle: 'italic', marginBottom: '0.75rem' } }, 'Steel, sorcery, and adventure'),
-                    h('p', { style: { color: '#d1d5db', fontSize: '0.875rem', lineHeight: '1.5' } }, author.bio.substring(0, 150) + '...')
-                  )
-                )
-              )
-            ),
-            
-            h('div', { style: { background: '#1e293b', borderRadius: '0.75rem', padding: '2rem', border: '1px solid #334155' } },
-              h('h3', { style: { fontSize: '1.5rem', fontWeight: 'bold', color: 'white', textAlign: 'center', marginBottom: '1.5rem' } }, 'More Authors Coming Soon'),
-              h('div', { style: { display: 'grid', gridTemplateColumns: window.innerWidth >= 768 ? 'repeat(3, 1fr)' : '1fr', gap: '1.5rem' } },
-                comingSoonAuthors.map((author, idx) =>
-                  h('div', { 
-                    key: idx,
-                    style: { 
-                      textAlign: 'center',
-                      padding: '1.5rem',
-                      background: 'rgba(30, 41, 59, 0.5)',
-                      borderRadius: '0.5rem',
-                      border: '1px solid #475569'
-                    }
-                  },
-                    h('div', { 
-                      style: { 
-                        width: '5rem',
-                        height: '5rem',
-                        borderRadius: '50%',
-                        background: 'linear-gradient(to bottom right, #475569, #334155)',
-                        margin: '0 auto 1rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }
-                    },
-                      h(Users, { style: { width: '2.5rem', height: '2.5rem', color: '#9ca3af' } })
-                    ),
-                    h('h4', { style: { fontSize: '1.125rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' } }, author.name),
-                    h('p', { style: { color: '#22d3ee', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' } }, author.genre),
-                    h('p', { style: { color: '#9ca3af', fontSize: '0.875rem', fontStyle: 'italic' } }, author.tagline)
-                  )
-                )
-              ),
-              h('p', { style: { textAlign: 'center', color: '#9ca3af', marginTop: '1.5rem', fontSize: '0.875rem' } }, 
-                'We\'re building a diverse catalog of fantasy voices. Stay tuned for updates on these upcoming authors.'
-              )
-            )
-          ),
-          
+            mobileMenuOpen ? h(X, { className: 'h-6 w-6' }) : h(Menu, { className: 'h-6 w-6' })
+          )
+        )
+      )
+    ),
+    
+    mobileMenuOpen && h('div', { className: 'md:hidden', style: { backgroundColor: 'rgba(30, 41, 59, 0.95)', backdropFilter: 'blur(8px)' } },
+      h('div', { style: { padding: '0.5rem 0.5rem 0.75rem' } },
+        ['home', 'about', 'authors', 'books', 'newsletter', 'contact'].map(page =>
+          h('button', {
+            key: page,
+            onClick: () => navigateTo(page),
+            style: {
+              color: '#d1d5db',
+              display: 'block',
+              width: '100%',
+              textAlign: 'left',
+              padding: '0.5rem 0.75rem',
+              fontSize: '1rem',
+              fontWeight: '500',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              borderRadius: '0.375rem'
+            },
+            onMouseOver: (e) => e.target.style.color = 'white',
+            onMouseOut: (e) => e.target.style.color = '#d1d5db'
+          }, page.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '))
+        )
+      )
+    )
+  );
+
+  // Footer
+  const footer = h('footer', { 
+    style: { 
+      background: '#020617',
+      borderTop: '1px solid #334155',
+      padding: '2rem',
+      marginTop: '4rem'
+    }
+  },
+    h('div', { style: { maxWidth: '1280px', margin: '0 auto', textAlign: 'center' } },
+      h('p', { style: { color: '#9ca3af', marginBottom: '0.5rem' } }, '© 2025 Nova Realms Publishing. All rights reserved.'),
+      h('p', { style: { color: '#9ca3af', fontSize: '0.875rem' } }, 'Diverse voices exploring every shade of fantasy')
+    )
+  );
+
+  // HOME PAGE
+  const homePage = h('div', null,
+    h('div', { 
+      style: { 
+        position: 'relative',
+        background: 'linear-gradient(to bottom right, #0f172a, #164e63, #1e3a8a)',
+        overflow: 'hidden'
+      }
+    },
+      h('div', { 
+        style: { 
+          position: 'relative',
+          maxWidth: '1280px',
+          margin: '0 auto',
+          padding: '6rem 1rem',
+          textAlign: 'center'
+        }
+      },
+        h('h1', { style: { fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 'bold', color: 'white', marginBottom: '1.5rem', letterSpacing: '-0.025em' } }, 'Nova Realms Publishing'),
+        h('p', { style: { fontSize: 'clamp(1.25rem, 2.5vw, 1.5rem)', color: '#a5f3fc', marginBottom: '2rem' } }, 'Diverse voices exploring every shade of fantasy'),
+        h('button', {
+          onClick: () => navigateTo('books'),
+          style: {
+            background: 'linear-gradient(to right, #0891b2, #2563eb)',
+            color: 'white',
+            fontWeight: '600',
+            padding: '0.75rem 2rem',
+            borderRadius: '0.5rem',
+            border: 'none',
+            fontSize: '1rem',
+            cursor: 'pointer',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            boxShadow: '0 10px 15px -3px rgba(6, 182, 212, 0.3)',
+            transition: 'all 0.3s'
+          },
+          onMouseOver: (e) => {
+            e.target.style.transform = 'scale(1.05)';
+            e.target.style.background = 'linear-gradient(to right, #06b6d4, #3b82f6)';
+          },
+          onMouseOut: (e) => {
+            e.target.style.transform = 'scale(1)';
+            e.target.style.background = 'linear-gradient(to right, #0891b2, #2563eb)';
+          }
+        }, 
+          'Discover Our Books',
+          h(ChevronRight, { style: { width: '20px', height: '20px' } })
+        )
+      )
+    ),
+    
+    h('div', { style: { maxWidth: '1280px', margin: '0 auto', padding: '4rem 1rem' } },
+      h('div', { style: { textAlign: 'center', marginBottom: '3rem' } },
+        h('h2', { style: { fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 'Featured Release'),
+        h('div', { style: { width: '5rem', height: '0.25rem', background: 'linear-gradient(to right, #06b6d4, #3b82f6)', margin: '0 auto' } })
+      ),
+      
+      h('div', { 
+        style: { 
+          background: '#1e293b',
+          borderRadius: '0.75rem',
+          overflow: 'hidden',
+          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5)',
+          border: '1px solid #334155',
+          transition: 'border-color 0.3s'
+        },
+        onMouseOver: (e) => e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.5)',
+        onMouseOut: (e) => e.currentTarget.style.borderColor = '#334155'
+      },
+        h('div', { style: { display: 'flex', flexDirection: window.innerWidth >= 768 ? 'row' : 'column' } },
           h('div', { 
             style: { 
-              marginTop: '5rem',
-              background: 'linear-gradient(to bottom right, #164e63, #1e40af, #4338ca)',
-              borderRadius: '0.75rem',
-              padding: '3rem 2rem',
-              textAlign: 'center'
+              width: window.innerWidth >= 768 ? '33.333%' : '100%',
+              position: 'relative',
+              overflow: 'hidden'
             }
           },
-            h(Mail, { style: { width: '3rem', height: '3rem', color: 'white', margin: '0 auto 1rem' } }),
-            h('h2', { style: { fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 'Join Our Reader Community'),
-            h('p', { style: { color: '#a5f3fc', marginBottom: '0.5rem', maxWidth: '42rem', margin: '0 auto 0.5rem' } }, 
-              'Subscribe to the Nova Realms newsletter for updates on The Hunter\'s Crown Chronicles, upcoming author announcements, and exclusive fantasy content.'
+            author.books[0].image ? h('img', {
+              src: author.books[0].image,
+              alt: author.books[0].title,
+              style: {
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                minHeight: '20rem'
+              }
+            }) : h('div', {
+              style: {
+                width: '100%',
+                minHeight: '20rem',
+                background: 'linear-gradient(to bottom right, #0f172a, #78350f, #ea580c)',
+                padding: '3rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }
+            },
+              h('div', { style: { textAlign: 'center' } },
+                h(Sword, { style: { width: '8rem', height: '8rem', color: 'white', margin: '0 auto 1rem' } }),
+                h('div', { style: { color: 'white', fontSize: '1.5rem', fontWeight: 'bold' } }, 'The Reluctant Blade')
+              )
+            )
+          ),
+          h('div', { style: { width: window.innerWidth >= 768 ? '66.667%' : '100%', padding: '2rem' } },
+            h('div', { style: { display: 'flex', alignItems: 'center', marginBottom: '1rem' } },
+              [1,2,3,4,5].map(i => h(Star, { key: i, style: { width: '1.25rem', height: '1.25rem', color: '#fbbf24', fill: '#fbbf24', marginLeft: i > 1 ? '0.25rem' : 0 } })),
+              h('span', { style: { marginLeft: '0.5rem', color: '#9ca3af' } }, 'New Release')
             ),
-            h('p', { style: { color: '#67e8f9', fontSize: '0.875rem', marginBottom: '1.5rem' } },
-              'Prefer author-specific updates? ',
-              h('button', {
-                onClick: () => navigateTo('newsletter'),
-                style: {
-                  textDecoration: 'underline',
-                  background: 'none',
-                  border: 'none',
-                  color: '#67e8f9',
-                  cursor: 'pointer',
-                  fontWeight: '600'
-                },
-                onMouseOver: (e) => e.target.style.color = 'white',
-                onMouseOut: (e) => e.target.style.color = '#67e8f9'
-              }, 'Choose your newsletters here')
+            h('h3', { style: { fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' } }, 'The Reluctant Blade'),
+            h('p', { style: { color: '#fbbf24', marginBottom: '0.5rem' } }, 'by Liam Mercer'),
+            h('p', { style: { color: '#9ca3af', fontSize: '0.875rem', fontStyle: 'italic', marginBottom: '1rem' } }, 'The Hunter\'s Crown Chronicles #1'),
+            h('p', { style: { color: '#d1d5db', marginBottom: '1.5rem', lineHeight: '1.75' } }, 
+              'Arthur is no king, just a skilled hunter battling dark creatures for the mysterious Faerie Queene. Haunted by dreams of destiny and urged by Merlin, he resists the path laid before him. When his sword is stolen and allies emerge from the shadows, Arthur must decide if he will embrace his fate or remain a reluctant blade in a world on the brink of war.'
             ),
-            h('div', { style: { display: 'flex', flexDirection: window.innerWidth >= 640 ? 'row' : 'column', gap: '1rem', maxWidth: '28rem', margin: '0 auto' } },
-              h('input', { 
-                type: 'email',
-                placeholder: 'Your email address',
-                style: {
-                  flex: 1,
-                  padding: '0.75rem 1rem',
-                  borderRadius: '0.5rem',
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
+            h('div', { style: { display: 'flex', flexWrap: 'wrap', gap: '1rem' } },
+              h('button', { 
+                style: { 
+                  background: '#f59e0b',
                   color: 'white',
-                  outline: 'none'
-                }
-              }),
-              h('button', {
-                style: {
-                  background: 'white',
-                  color: '#164e63',
-                  fontWeight: '600',
-                  padding: '0.75rem 2rem',
+                  padding: '0.5rem 1.5rem',
                   borderRadius: '0.5rem',
                   border: 'none',
                   cursor: 'pointer',
                   transition: 'background 0.2s'
                 },
-                onMouseOver: (e) => e.target.style.background = '#e0f2fe',
-                onMouseOut: (e) => e.target.style.background = 'white'
-              }, 'Subscribe')
+                onMouseOver: (e) => e.target.style.background = '#d97706',
+                onMouseOut: (e) => e.target.style.background = '#f59e0b'
+              }, 'Buy Now'),
+              h('button', { 
+                onClick: () => navigateTo('authors'),
+                style: { 
+                  border: '1px solid #f59e0b',
+                  color: '#fbbf24',
+                  background: 'transparent',
+                  padding: '0.5rem 1.5rem',
+                  borderRadius: '0.5rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s'
+                },
+                onMouseOver: (e) => {
+                  e.target.style.background = '#f59e0b';
+                  e.target.style.color = 'white';
+                },
+                onMouseOut: (e) => {
+                  e.target.style.background = 'transparent';
+                  e.target.style.color = '#fbbf24';
+                }
+              }, 'Learn More')
             )
           )
         )
-      );
-
-      // BOOKS PAGE
-      const booksPage = h('div', null,
-        h('div', { 
-          style: { 
-            background: 'linear-gradient(to bottom right, #0f172a, #164e63, #1e3a8a)',
-            padding: '5rem 1rem',
-            textAlign: 'center'
-          }
-        },
-          h('h1', { style: { fontSize: 'clamp(2.5rem, 5vw, 3rem)', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 
-            'The Hunter\'s Crown Chronicles'
-          ),
-          h('p', { style: { fontSize: 'clamp(1.125rem, 2vw, 1.25rem)', color: '#a5f3fc', marginBottom: '1rem' } }, 
-            'A six-book sword and sorcery epic by Liam Mercer'
-          ),
-          h('p', { style: { fontSize: '1.125rem', color: '#67e8f9', maxWidth: '42rem', margin: '0 auto' } }, 
-            'Before he wore the crown, he hunted the shadows. Follow Arthur\'s journey from monster hunter to legendary king.'
+      ),
+      
+      h('div', { style: { marginTop: '5rem' } },
+        h('div', { style: { textAlign: 'center', marginBottom: '3rem' } },
+          h('h2', { style: { fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 'Our Featured Author'),
+          h('div', { style: { width: '5rem', height: '0.25rem', background: 'linear-gradient(to right, #06b6d4, #3b82f6)', margin: '0 auto 0.75rem' } }),
+          h('p', { style: { color: '#9ca3af' } }, 'Launching with epic sword and sorcery adventure')
+        ),
+        
+        h('div', { style: { maxWidth: '48rem', margin: '0 auto 4rem' } },
+          h('div', { 
+            onClick: () => navigateTo('authors'),
+            style: { 
+              background: '#1e293b',
+              borderRadius: '0.75rem',
+              padding: '2rem',
+              border: '1px solid #334155',
+              cursor: 'pointer',
+              transition: 'all 0.3s'
+            },
+            onMouseOver: (e) => {
+              e.currentTarget.style.borderColor = '#f59e0b';
+              e.currentTarget.style.transform = 'scale(1.02)';
+            },
+            onMouseOut: (e) => {
+              e.currentTarget.style.borderColor = '#334155';
+              e.currentTarget.style.transform = 'scale(1)';
+            }
+          },
+            h('div', { style: { display: 'flex', alignItems: 'center', gap: '1.5rem', flexDirection: window.innerWidth >= 640 ? 'row' : 'column', textAlign: window.innerWidth >= 640 ? 'left' : 'center' } },
+              h('div', { 
+                style: { 
+                  width: '8rem',
+                  height: '8rem',
+                  borderRadius: '50%',
+                  background: 'linear-gradient(to bottom right, #ea580c, #f59e0b, #fbbf24)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                  transition: 'transform 0.3s'
+                }
+              },
+                h(Sword, { style: { width: '4rem', height: '4rem', color: 'white' } })
+              ),
+              h('div', { style: { flex: 1 } },
+                h('h3', { style: { fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' } }, 'Liam Mercer'),
+                h('p', { style: { color: '#fbbf24', marginBottom: '0.5rem', fontWeight: '600' } }, 'Sword & Sorcery'),
+                h('p', { style: { color: '#9ca3af', fontSize: '0.875rem', fontStyle: 'italic', marginBottom: '0.75rem' } }, 'Steel, sorcery, and adventure'),
+                h('p', { style: { color: '#d1d5db', fontSize: '0.875rem', lineHeight: '1.5' } }, author.bio.substring(0, 150) + '...')
+              )
+            )
           )
         ),
         
-        h('div', { style: { maxWidth: '1280px', margin: '0 auto', padding: '4rem 1rem' } },
-          h('div', { style: { display: 'grid', gridTemplateColumns: window.innerWidth >= 1024 ? 'repeat(3, 1fr)' : window.innerWidth >= 768 ? 'repeat(2, 1fr)' : '1fr', gap: '1.5rem' } },
-            author.books.map((book, idx) =>
-              h('div', {
+        h('div', { style: { background: '#1e293b', borderRadius: '0.75rem', padding: '2rem', border: '1px solid #334155' } },
+          h('h3', { style: { fontSize: '1.5rem', fontWeight: 'bold', color: 'white', textAlign: 'center', marginBottom: '1.5rem' } }, 'More Authors Coming Soon'),
+          h('div', { style: { display: 'grid', gridTemplateColumns: window.innerWidth >= 768 ? 'repeat(3, 1fr)' : '1fr', gap: '1.5rem' } },
+            comingSoonAuthors.map((author, idx) =>
+              h('div', { 
                 key: idx,
-                style: {
-                  background: '#1e293b',
-                  borderRadius: '0.75rem',
-                  overflow: 'hidden',
-                  border: '1px solid #334155',
-                  transition: 'all 0.3s'
-                },
-                onMouseOver: (e) => {
-                  e.currentTarget.style.borderColor = '#f59e0b';
-                  e.currentTarget.style.transform = 'scale(1.05)';
-                },
-                onMouseOut: (e) => {
-                  e.currentTarget.style.borderColor = '#334155';
-                  e.currentTarget.style.transform = 'scale(1)';
+                style: { 
+                  textAlign: 'center',
+                  padding: '1.5rem',
+                  background: 'rgba(30, 41, 59, 0.5)',
+                  borderRadius: '0.5rem',
+                  border: '1px solid #475569'
                 }
               },
-                h('div', {
-                  style: {
-                    height: '16rem',
-                    background: `linear-gradient(to bottom right, ${['#0f172a, #78350f, #ea580c', '#3f3f46, #ea580c, #fbbf24', '#7f1d1d, #78350f, #ea580c', '#374151, #7f1d1d, #ea580c', '#57534e, #3f3f46, #78350f', '#000000, #0f172a, #854d0e'][idx]})`,
+                h('div', { 
+                  style: { 
+                    width: '5rem',
+                    height: '5rem',
+                    borderRadius: '50%',
+                    background: 'linear-gradient(to bottom right, #475569, #334155)',
+                    margin: '0 auto 1rem',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    position: 'relative',
-                    overflow: 'hidden'
+                    justifyContent: 'center'
                   }
                 },
-                  h('div', { style: { position: 'absolute', inset: 0, background: 'rgba(0, 0, 0, 0.2)' } }),
-                  h(BookOpen, { style: { width: '8rem', height: '8rem', color: 'white', position: 'relative', zIndex: 10 } })
+                  h(Users, { style: { width: '2.5rem', height: '2.5rem', color: '#9ca3af' } })
                 ),
-                h('div', { style: { padding: '1.5rem' } },
-                  h('h3', { style: { fontSize: '1.25rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' } }, book.title),
-                  h('p', { style: { color: '#9ca3af', fontSize: '0.75rem', marginBottom: '0.75rem', fontStyle: 'italic' } }, 
-                    `The Hunter's Crown Chronicles ${book.series}`
-                  ),
-                  h('p', { 
-                    style: { 
-                      color: '#9ca3af',
-                      fontSize: '0.875rem',
-                      marginBottom: '1rem',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      display: '-webkit-box',
-                      WebkitLineClamp: 4,
-                      WebkitBoxOrient: 'vertical'
-                    }
-                  }, book.blurb),
-                  h('button', {
-                    style: {
-                      width: '100%',
-                      background: '#f59e0b',
-                      color: 'white',
-                      fontWeight: '600',
-                      padding: '0.5rem',
-                      borderRadius: '0.5rem',
-                      border: 'none',
-                      cursor: 'pointer',
-                      transition: 'background 0.2s'
-                    },
-                    onMouseOver: (e) => e.target.style.background = '#d97706',
-                    onMouseOut: (e) => e.target.style.background = '#f59e0b'
-                  }, 'View Details')
-                )
+                h('h4', { style: { fontSize: '1.125rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' } }, author.name),
+                h('p', { style: { color: '#22d3ee', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' } }, author.genre),
+                h('p', { style: { color: '#9ca3af', fontSize: '0.875rem', fontStyle: 'italic' } }, author.tagline)
               )
             )
           ),
-          
-          h('div', { style: { marginTop: '4rem', maxWidth: '48rem', margin: '4rem auto 0', textAlign: 'center' } },
+          h('p', { style: { textAlign: 'center', color: '#9ca3af', marginTop: '1.5rem', fontSize: '0.875rem' } }, 
+            'We\'re building a diverse catalog of fantasy voices. Stay tuned for updates on these upcoming authors.'
+          )
+        )
+      ),
+      
+      h('div', { 
+        style: { 
+          marginTop: '5rem',
+          background: 'linear-gradient(to bottom right, #164e63, #1e40af, #4338ca)',
+          borderRadius: '0.75rem',
+          padding: '3rem 2rem',
+          textAlign: 'center'
+        }
+      },
+        h(Mail, { style: { width: '3rem', height: '3rem', color: 'white', margin: '0 auto 1rem' } }),
+        h('h2', { style: { fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 'Join Our Reader Community'),
+        h('p', { style: { color: '#a5f3fc', marginBottom: '0.5rem', maxWidth: '42rem', margin: '0 auto 0.5rem' } }, 
+          'Subscribe to the Nova Realms newsletter for updates on The Hunter\'s Crown Chronicles, upcoming author announcements, and exclusive fantasy content.'
+        ),
+        h('p', { style: { color: '#67e8f9', fontSize: '0.875rem', marginBottom: '1.5rem' } },
+          'Prefer author-specific updates? ',
+          h('button', {
+            onClick: () => navigateTo('newsletter'),
+            style: {
+              textDecoration: 'underline',
+              background: 'none',
+              border: 'none',
+              color: '#67e8f9',
+              cursor: 'pointer',
+              fontWeight: '600'
+            },
+            onMouseOver: (e) => e.target.style.color = 'white',
+            onMouseOut: (e) => e.target.style.color = '#67e8f9'
+          }, 'Choose your newsletters here')
+        ),
+        h('div', { style: { display: 'flex', flexDirection: window.innerWidth >= 640 ? 'row' : 'column', gap: '1rem', maxWidth: '28rem', margin: '0 auto' } },
+          h('input', { 
+            type: 'email',
+            placeholder: 'Your email address',
+            style: {
+              flex: 1,
+              padding: '0.75rem 1rem',
+              borderRadius: '0.5rem',
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              color: 'white',
+              outline: 'none'
+            }
+          }),
+          h('button', {
+            style: {
+              background: 'white',
+              color: '#164e63',
+              fontWeight: '600',
+              padding: '0.75rem 2rem',
+              borderRadius: '0.5rem',
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'background 0.2s'
+            },
+            onMouseOver: (e) => e.target.style.background = '#e0f2fe',
+            onMouseOut: (e) => e.target.style.background = 'white'
+          }, 'Subscribe')
+        )
+      )
+    )
+  );
+
+  // BOOKS PAGE
+  const booksPage = h('div', null,
+    h('div', { 
+      style: { 
+        background: 'linear-gradient(to bottom right, #0f172a, #164e63, #1e3a8a)',
+        padding: '5rem 1rem',
+        textAlign: 'center'
+      }
+    },
+      h('h1', { style: { fontSize: 'clamp(2.5rem, 5vw, 3rem)', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 
+        'The Hunter\'s Crown Chronicles'
+      ),
+      h('p', { style: { fontSize: 'clamp(1.125rem, 2vw, 1.25rem)', color: '#a5f3fc', marginBottom: '1rem' } }, 
+        'A six-book sword and sorcery epic by Liam Mercer'
+      ),
+      h('p', { style: { fontSize: '1.125rem', color: '#67e8f9', maxWidth: '42rem', margin: '0 auto' } }, 
+        'Before he wore the crown, he hunted the shadows. Follow Arthur\'s journey from monster hunter to legendary king.'
+      )
+    ),
+    
+    h('div', { style: { maxWidth: '1280px', margin: '0 auto', padding: '4rem 1rem' } },
+      h('div', { style: { display: 'grid', gridTemplateColumns: window.innerWidth >= 1024 ? 'repeat(3, 1fr)' : window.innerWidth >= 768 ? 'repeat(2, 1fr)' : '1fr', gap: '1.5rem' } },
+        author.books.map((book, idx) =>
+          h('div', {
+            key: idx,
+            style: {
+              background: '#1e293b',
+              borderRadius: '0.75rem',
+              overflow: 'hidden',
+              border: '1px solid #334155',
+              transition: 'all 0.3s'
+            },
+            onMouseOver: (e) => {
+              e.currentTarget.style.borderColor = '#f59e0b';
+              e.currentTarget.style.transform = 'scale(1.05)';
+            },
+            onMouseOut: (e) => {
+              e.currentTarget.style.borderColor = '#334155';
+              e.currentTarget.style.transform = 'scale(1)';
+            }
+          },
+            h('div', {
+              style: {
+                height: '24rem',
+                position: 'relative',
+                overflow: 'hidden',
+                background: '#0f172a'
+              }
+            },
+              book.image ? h('img', {
+                src: book.image,
+                alt: book.title,
+                style: {
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }
+              }) : h('div', {
+                style: {
+                  width: '100%',
+                  height: '100%',
+                  background: `linear-gradient(to bottom right, ${['#0f172a, #78350f, #ea580c', '#3f3f46, #ea580c, #fbbf24', '#7f1d1d, #78350f, #ea580c', '#374151, #7f1d1d, #ea580c', '#57534e, #3f3f46, #78350f', '#000000, #0f172a, #854d0e'][idx]})`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  position: 'relative'
+                }
+              },
+                h('div', { style: { position: 'absolute', inset: 0, background: 'rgba(0, 0, 0, 0.2)' } }),
+                h(BookOpen, { style: { width: '8rem', height: '8rem', color: 'white', position: 'relative', zIndex: 10 } })
+              )
+            ),
+            h('div', { style: { padding: '1.5rem' } },
+              h('h3', { style: { fontSize: '1.25rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' } }, book.title),
+              h('p', { style: { color: '#9ca3af', fontSize: '0.75rem', marginBottom: '0.75rem', fontStyle: 'italic' } }, 
+                `The Hunter's Crown Chronicles ${book.series}`
+              ),
+              h('p', { 
+                style: { 
+                  color: '#9ca3af',
+                  fontSize: '0.875rem',
+                  marginBottom: '1rem',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  display: '-webkit-box',
+                  WebkitLineClamp: 4,
+                  WebkitBoxOrient: 'vertical'
+                }
+              }, book.blurb),
+              h('button', {
+                style: {
+                  width: '100%',
+                  background: '#f59e0b',
+                  color: 'white',
+                  fontWeight: '600',
+                  padding: '0.5rem',
+                  borderRadius: '0.5rem',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'background 0.2s'
+                },
+                onMouseOver: (e) => e.target.style.background = '#d97706',
+                onMouseOut: (e) => e.target.style.background = '#f59e0b'
+              }, 'View Details')
+            )
+          )
+        )
+      ),
+      
+      h('div', { style: { marginTop: '4rem', maxWidth: '48rem', margin: '4rem auto 0', textAlign: 'center' } },
+        h('button', {
+          onClick: () => navigateTo('authors'),
+          style: {
+            display: 'inline-flex',
+            alignItems: 'center',
+            color: '#fbbf24',
+            fontWeight: '600',
+            fontSize: '1.125rem',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            transition: 'color 0.2s'
+          },
+          onMouseOver: (e) => e.target.style.color = '#f59e0b',
+          onMouseOut: (e) => e.target.style.color = '#fbbf24'
+        },
+          'Learn more about Liam Mercer and The Hunter\'s Crown Chronicles',
+          h(ChevronRight, { style: { marginLeft: '0.25rem', width: '1.5rem', height: '1.5rem' } })
+        )
+      )
+    )
+  );
+
+  // AUTHORS PAGE
+  const authorsPage = h('div', null,
+    h('div', { 
+      style: { 
+        background: 'linear-gradient(to bottom right, #0f172a, #164e63, #1e3a8a)',
+        padding: '5rem 1rem',
+        textAlign: 'center'
+      }
+    },
+      h('h1', { style: { fontSize: '3rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 'Our Authors'),
+      h('p', { style: { fontSize: '1.25rem', color: '#a5f3fc' } }, 'Distinct voices, unique perspectives, unforgettable fantasy')
+    ),
+    h('div', { style: { maxWidth: '1280px', margin: '0 auto', padding: '4rem 1rem' } },
+      h('div', { style: { marginBottom: '4rem' } },
+        h('h2', { style: { fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '2rem', textAlign: 'center' } }, 'Featured Author'),
+        h('div', { 
+          style: { 
+            background: '#1e293b',
+            borderRadius: '0.75rem',
+            overflow: 'hidden',
+            border: '1px solid #334155',
+            maxWidth: '56rem',
+            margin: '0 auto',
+            cursor: 'pointer'
+          },
+          onClick: () => navigateTo('books')
+        },
+          h('div', { 
+            style: { 
+              height: '12rem',
+              background: 'linear-gradient(to bottom right, #ea580c, #f59e0b, #fbbf24)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative'
+            }
+          },
+            h('div', { style: { position: 'absolute', inset: 0, background: 'rgba(0, 0, 0, 0.2)' } }),
+            h(Sword, { style: { width: '6rem', height: '6rem', color: 'white', position: 'relative', zIndex: 10 } })
+          ),
+          h('div', { style: { padding: '2rem' } },
+            h('h3', { style: { fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' } }, author.name),
+            h('p', { style: { color: '#fbbf24', fontWeight: '600', marginBottom: '0.75rem', fontSize: '1.125rem' } }, author.genre),
+            h('p', { style: { color: '#9ca3af', fontStyle: 'italic', marginBottom: '1rem', fontSize: '1.125rem' } }, author.tagline),
+            h('p', { style: { color: '#d1d5db', marginBottom: '1.5rem', lineHeight: '1.75' } }, author.bio),
             h('button', {
-              onClick: () => navigateTo('authors'),
               style: {
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -737,294 +844,226 @@
                 fontSize: '1.125rem',
                 background: 'none',
                 border: 'none',
-                cursor: 'pointer',
-                transition: 'color 0.2s'
-              },
-              onMouseOver: (e) => e.target.style.color = '#f59e0b',
-              onMouseOut: (e) => e.target.style.color = '#fbbf24'
+                cursor: 'pointer'
+              }
             },
-              'Learn more about Liam Mercer and The Hunter\'s Crown Chronicles',
+              'View Books & Series',
               h(ChevronRight, { style: { marginLeft: '0.25rem', width: '1.5rem', height: '1.5rem' } })
             )
           )
         )
-      );
-
-      // AUTHORS PAGE
-      const authorsPage = h('div', null,
-        h('div', { 
-          style: { 
-            background: 'linear-gradient(to bottom right, #0f172a, #164e63, #1e3a8a)',
-            padding: '5rem 1rem',
-            textAlign: 'center'
-          }
-        },
-          h('h1', { style: { fontSize: '3rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 'Our Authors'),
-          h('p', { style: { fontSize: '1.25rem', color: '#a5f3fc' } }, 'Distinct voices, unique perspectives, unforgettable fantasy')
+      ),
+      h('div', { style: { background: '#1e293b', borderRadius: '0.75rem', padding: '2rem', border: '1px solid #334155' } },
+        h('h3', { style: { fontSize: '1.5rem', fontWeight: 'bold', color: 'white', textAlign: 'center', marginBottom: '0.5rem' } }, 
+          'More Authors Coming Soon'
         ),
-        h('div', { style: { maxWidth: '1280px', margin: '0 auto', padding: '4rem 1rem' } },
-          h('div', { style: { marginBottom: '4rem' } },
-            h('h2', { style: { fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '2rem', textAlign: 'center' } }, 'Featured Author'),
+        h('p', { style: { color: '#9ca3af', textAlign: 'center', marginBottom: '2rem' } }, 
+          'We\'re expanding our catalog with additional voices across fantasy subgenres'
+        ),
+        h('div', { style: { display: 'grid', gridTemplateColumns: window.innerWidth >= 768 ? 'repeat(3, 1fr)' : '1fr', gap: '1.5rem' } },
+          comingSoonAuthors.map((author, idx) =>
             h('div', { 
+              key: idx,
               style: { 
-                background: '#1e293b',
-                borderRadius: '0.75rem',
-                overflow: 'hidden',
-                border: '1px solid #334155',
-                maxWidth: '56rem',
-                margin: '0 auto',
-                cursor: 'pointer'
-              },
-              onClick: () => navigateTo('books')
+                textAlign: 'center',
+                padding: '1.5rem',
+                background: 'rgba(30, 41, 59, 0.5)',
+                borderRadius: '0.5rem',
+                border: '1px solid #475569'
+              }
             },
               h('div', { 
                 style: { 
-                  height: '12rem',
-                  background: 'linear-gradient(to bottom right, #ea580c, #f59e0b, #fbbf24)',
+                  width: '6rem',
+                  height: '6rem',
+                  borderRadius: '50%',
+                  background: 'linear-gradient(to bottom right, #475569, #334155)',
+                  margin: '0 auto 1rem',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  position: 'relative'
+                  justifyContent: 'center'
                 }
               },
-                h('div', { style: { position: 'absolute', inset: 0, background: 'rgba(0, 0, 0, 0.2)' } }),
-                h(Sword, { style: { width: '6rem', height: '6rem', color: 'white', position: 'relative', zIndex: 10 } })
+                h(Users, { style: { width: '3rem', height: '3rem', color: '#9ca3af' } })
               ),
-              h('div', { style: { padding: '2rem' } },
-                h('h3', { style: { fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' } }, author.name),
-                h('p', { style: { color: '#fbbf24', fontWeight: '600', marginBottom: '0.75rem', fontSize: '1.125rem' } }, author.genre),
-                h('p', { style: { color: '#9ca3af', fontStyle: 'italic', marginBottom: '1rem', fontSize: '1.125rem' } }, author.tagline),
-                h('p', { style: { color: '#d1d5db', marginBottom: '1.5rem', lineHeight: '1.75' } }, author.bio),
-                h('button', {
-                  style: {
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    color: '#fbbf24',
-                    fontWeight: '600',
-                    fontSize: '1.125rem',
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer'
-                  }
-                },
-                  'View Books & Series',
-                  h(ChevronRight, { style: { marginLeft: '0.25rem', width: '1.5rem', height: '1.5rem' } })
-                )
-              )
+              h('h4', { style: { fontSize: '1.25rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' } }, author.name),
+              h('p', { style: { color: '#22d3ee', fontWeight: '600', marginBottom: '0.5rem' } }, author.genre),
+              h('p', { style: { color: '#9ca3af', fontStyle: 'italic' } }, author.tagline)
+            )
+          )
+        )
+      )
+    )
+  );
+
+  // ABOUT PAGE
+  const aboutPage = h('div', null,
+    h('div', { 
+      style: { 
+        background: 'linear-gradient(to bottom right, #0f172a, #164e63, #1e3a8a)',
+        padding: '5rem 1rem',
+        textAlign: 'center'
+      }
+    },
+      h('h1', { style: { fontSize: '3rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 'About Nova Realms Publishing'),
+      h('p', { style: { fontSize: '1.25rem', color: '#a5f3fc' } }, 'Championing diverse voices in fantasy fiction')
+    ),
+    h('div', { style: { maxWidth: '56rem', margin: '0 auto', padding: '4rem 1rem' } },
+      h('div', { style: { background: '#1e293b', borderRadius: '0.75rem', padding: '2rem', border: '1px solid #334155', marginBottom: '2rem' } },
+        h('h2', { style: { fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '1.5rem' } }, 'Our Story'),
+        h('p', { style: { color: '#d1d5db', marginBottom: '1rem', lineHeight: '1.75' } }, 
+          'Nova Realms Publishing was founded on the belief that fantasy is richer when told through diverse voices and perspectives. We\'re a modern publishing house committed to amplifying authors who bring fresh viewpoints to the fantasy genre, whether through their identities, lived experiences, or unique creative visions.'
+        ),
+        h('p', { style: { color: '#d1d5db', marginBottom: '1rem', lineHeight: '1.75' } }, 
+          'We\'re launching with Liam Mercer\'s epic sword and sorcery series, The Hunter\'s Crown Chronicles, and are actively building our catalog to include voices across urban fantasy, epic fantasy, and dark fantasy. Each author we work with brings something meaningful to the conversation through new perspectives, underrepresented voices, and stories that need to be told.'
+        ),
+        h('p', { style: { color: '#d1d5db', lineHeight: '1.75' } }, 
+          'As we grow, we remain committed to quality storytelling and authentic representation. We specialize exclusively in adult fantasy fiction across multiple subgenres, publishing stories that expand what fantasy can be and who gets to tell these stories.'
+        )
+      )
+    )
+  );
+
+  // NEWSLETTER PAGE
+  const newsletterPage = h('div', null,
+    h('div', { 
+      style: { 
+        background: 'linear-gradient(to bottom right, #0f172a, #164e63, #1e3a8a)',
+        padding: '5rem 1rem',
+        textAlign: 'center'
+      }
+    },
+      h(Mail, { style: { width: '4rem', height: '4rem', color: 'white', margin: '0 auto 1.5rem' } }),
+      h('h1', { style: { fontSize: '3rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 'Newsletter Subscriptions'),
+      h('p', { style: { fontSize: '1.25rem', color: '#a5f3fc' } }, 'Choose which newsletters you\'d like to receive')
+    ),
+    h('div', { style: { maxWidth: '56rem', margin: '0 auto', padding: '4rem 1rem' } },
+      h('div', { style: { background: '#1e293b', borderRadius: '0.75rem', padding: '2rem', border: '1px solid #334155', marginBottom: '2rem' } },
+        h('h2', { style: { fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 'Subscription Options'),
+        h('p', { style: { color: '#d1d5db', marginBottom: '1.5rem' } }, 
+          'Currently featuring Liam Mercer\'s The Hunter\'s Crown Chronicles, with more authors joining our roster soon.'
+        ),
+        h('div', { style: { background: '#0f172a', borderRadius: '0.5rem', padding: '1.5rem', border: '2px solid #475569', marginBottom: '1rem' } },
+          h('h3', { style: { fontSize: '1.125rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' } }, 
+            'Nova Realms Publishing Newsletter'
+          ),
+          h('p', { style: { color: '#d1d5db', fontSize: '0.875rem' } }, 
+            'Get updates from all our authors, new release announcements, publishing house news, and exclusive fantasy content.'
+          )
+        ),
+        h('div', { style: { background: '#0f172a', borderRadius: '0.5rem', padding: '1.5rem', border: '2px solid #475569' } },
+          h('div', { style: { display: 'flex', alignItems: 'center', marginBottom: '0.5rem' } },
+            h('div', { 
+              style: { 
+                width: '2.5rem',
+                height: '2.5rem',
+                borderRadius: '50%',
+                background: 'linear-gradient(to bottom right, #ea580c, #f59e0b, #fbbf24)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginRight: '0.75rem'
+              }
+            },
+              h(Sword, { style: { width: '1.25rem', height: '1.25rem', color: 'white' } })
+            ),
+            h('div', null,
+              h('h3', { style: { fontSize: '1.125rem', fontWeight: 'bold', color: 'white' } }, 'Liam Mercer'),
+              h('p', { style: { color: '#fbbf24', fontSize: '0.875rem', fontWeight: '600' } }, 'Sword & Sorcery')
             )
           ),
-          h('div', { style: { background: '#1e293b', borderRadius: '0.75rem', padding: '2rem', border: '1px solid #334155' } },
-            h('h3', { style: { fontSize: '1.5rem', fontWeight: 'bold', color: 'white', textAlign: 'center', marginBottom: '0.5rem' } }, 
-              'More Authors Coming Soon'
-            ),
-            h('p', { style: { color: '#9ca3af', textAlign: 'center', marginBottom: '2rem' } }, 
-              'We\'re expanding our catalog with additional voices across fantasy subgenres'
-            ),
-            h('div', { style: { display: 'grid', gridTemplateColumns: window.innerWidth >= 768 ? 'repeat(3, 1fr)' : '1fr', gap: '1.5rem' } },
-              comingSoonAuthors.map((author, idx) =>
-                h('div', { 
-                  key: idx,
-                  style: { 
-                    textAlign: 'center',
-                    padding: '1.5rem',
-                    background: 'rgba(30, 41, 59, 0.5)',
-                    borderRadius: '0.5rem',
-                    border: '1px solid #475569'
-                  }
-                },
-                  h('div', { 
-                    style: { 
-                      width: '6rem',
-                      height: '6rem',
-                      borderRadius: '50%',
-                      background: 'linear-gradient(to bottom right, #475569, #334155)',
-                      margin: '0 auto 1rem',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }
-                  },
-                    h(Users, { style: { width: '3rem', height: '3rem', color: '#9ca3af' } })
-                  ),
-                  h('h4', { style: { fontSize: '1.25rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' } }, author.name),
-                  h('p', { style: { color: '#22d3ee', fontWeight: '600', marginBottom: '0.5rem' } }, author.genre),
-                  h('p', { style: { color: '#9ca3af', fontStyle: 'italic' } }, author.tagline)
-                )
-              )
-            )
+          h('p', { style: { color: '#d1d5db', fontSize: '0.875rem' } }, 
+            'Exclusive updates from Liam Mercer, including new releases from The Hunter\'s Crown Chronicles and free short stories.'
           )
         )
-      );
-
-      // ABOUT PAGE
-      const aboutPage = h('div', null,
-        h('div', { 
-          style: { 
-            background: 'linear-gradient(to bottom right, #0f172a, #164e63, #1e3a8a)',
-            padding: '5rem 1rem',
-            textAlign: 'center'
-          }
-        },
-          h('h1', { style: { fontSize: '3rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 'About Nova Realms Publishing'),
-          h('p', { style: { fontSize: '1.25rem', color: '#a5f3fc' } }, 'Championing diverse voices in fantasy fiction')
+      ),
+      h('div', { style: { background: '#1e293b', borderRadius: '0.75rem', padding: '2rem', border: '1px solid #334155' } },
+        h('div', { style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' } },
+          h('h3', { style: { fontSize: '1.125rem', fontWeight: '600', color: 'white' } }, 'Your Email Address')
         ),
-        h('div', { style: { maxWidth: '56rem', margin: '0 auto', padding: '4rem 1rem' } },
-          h('div', { style: { background: '#1e293b', borderRadius: '0.75rem', padding: '2rem', border: '1px solid #334155', marginBottom: '2rem' } },
-            h('h2', { style: { fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '1.5rem' } }, 'Our Story'),
-            h('p', { style: { color: '#d1d5db', marginBottom: '1rem', lineHeight: '1.75' } }, 
-              'Nova Realms Publishing was founded on the belief that fantasy is richer when told through diverse voices and perspectives. We\'re a modern publishing house committed to amplifying authors who bring fresh viewpoints to the fantasy genre, whether through their identities, lived experiences, or unique creative visions.'
-            ),
-            h('p', { style: { color: '#d1d5db', marginBottom: '1rem', lineHeight: '1.75' } }, 
-              'We\'re launching with Liam Mercer\'s epic sword and sorcery series, The Hunter\'s Crown Chronicles, and are actively building our catalog to include voices across urban fantasy, epic fantasy, and dark fantasy. Each author we work with brings something meaningful to the conversation through new perspectives, underrepresented voices, and stories that need to be told.'
-            ),
-            h('p', { style: { color: '#d1d5db', lineHeight: '1.75' } }, 
-              'As we grow, we remain committed to quality storytelling and authentic representation. We specialize exclusively in adult fantasy fiction across multiple subgenres, publishing stories that expand what fantasy can be and who gets to tell these stories.'
-            )
-          )
-        )
-      );
-
-      // NEWSLETTER PAGE
-      const newsletterPage = h('div', null,
-        h('div', { 
-          style: { 
-            background: 'linear-gradient(to bottom right, #0f172a, #164e63, #1e3a8a)',
-            padding: '5rem 1rem',
-            textAlign: 'center'
-          }
-        },
-          h(Mail, { style: { width: '4rem', height: '4rem', color: 'white', margin: '0 auto 1.5rem' } }),
-          h('h1', { style: { fontSize: '3rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 'Newsletter Subscriptions'),
-          h('p', { style: { fontSize: '1.25rem', color: '#a5f3fc' } }, 'Choose which newsletters you\'d like to receive')
+        h('div', { style: { display: 'flex', flexDirection: window.innerWidth >= 640 ? 'row' : 'column', gap: '1rem' } },
+          h('input', { 
+            type: 'email',
+            placeholder: 'your@email.com',
+            style: {
+              flex: 1,
+              padding: '0.75rem 1rem',
+              background: '#0f172a',
+              border: '1px solid #475569',
+              borderRadius: '0.5rem',
+              color: 'white',
+              outline: 'none'
+            }
+          }),
+          h('button', {
+            style: {
+              background: '#0891b2',
+              color: 'white',
+              fontWeight: '600',
+              padding: '0.75rem 2rem',
+              borderRadius: '0.5rem',
+              border: 'none',
+              cursor: 'pointer',
+              whiteSpace: 'nowrap'
+            }
+          }, 'Subscribe')
         ),
-        h('div', { style: { maxWidth: '56rem', margin: '0 auto', padding: '4rem 1rem' } },
-          h('div', { style: { background: '#1e293b', borderRadius: '0.75rem', padding: '2rem', border: '1px solid #334155', marginBottom: '2rem' } },
-            h('h2', { style: { fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 'Subscription Options'),
-            h('p', { style: { color: '#d1d5db', marginBottom: '1.5rem' } }, 
-              'Currently featuring Liam Mercer\'s The Hunter\'s Crown Chronicles, with more authors joining our roster soon.'
-            ),
-            h('div', { style: { background: '#0f172a', borderRadius: '0.5rem', padding: '1.5rem', border: '2px solid #475569', marginBottom: '1rem' } },
-              h('h3', { style: { fontSize: '1.125rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' } }, 
-                'Nova Realms Publishing Newsletter'
-              ),
-              h('p', { style: { color: '#d1d5db', fontSize: '0.875rem' } }, 
-                'Get updates from all our authors, new release announcements, publishing house news, and exclusive fantasy content.'
-              )
-            ),
-            h('div', { style: { background: '#0f172a', borderRadius: '0.5rem', padding: '1.5rem', border: '2px solid #475569' } },
-              h('div', { style: { display: 'flex', alignItems: 'center', marginBottom: '0.5rem' } },
-                h('div', { 
-                  style: { 
-                    width: '2.5rem',
-                    height: '2.5rem',
-                    borderRadius: '50%',
-                    background: 'linear-gradient(to bottom right, #ea580c, #f59e0b, #fbbf24)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginRight: '0.75rem'
-                  }
-                },
-                  h(Sword, { style: { width: '1.25rem', height: '1.25rem', color: 'white' } })
-                ),
-                h('div', null,
-                  h('h3', { style: { fontSize: '1.125rem', fontWeight: 'bold', color: 'white' } }, 'Liam Mercer'),
-                  h('p', { style: { color: '#fbbf24', fontSize: '0.875rem', fontWeight: '600' } }, 'Sword & Sorcery')
-                )
-              ),
-              h('p', { style: { color: '#d1d5db', fontSize: '0.875rem' } }, 
-                'Exclusive updates from Liam Mercer, including new releases from The Hunter\'s Crown Chronicles and free short stories.'
-              )
-            )
-          ),
-          h('div', { style: { background: '#1e293b', borderRadius: '0.75rem', padding: '2rem', border: '1px solid #334155' } },
-            h('div', { style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' } },
-              h('h3', { style: { fontSize: '1.125rem', fontWeight: '600', color: 'white' } }, 'Your Email Address')
-            ),
-            h('div', { style: { display: 'flex', flexDirection: window.innerWidth >= 640 ? 'row' : 'column', gap: '1rem' } },
-              h('input', { 
-                type: 'email',
-                placeholder: 'your@email.com',
-                style: {
-                  flex: 1,
-                  padding: '0.75rem 1rem',
-                  background: '#0f172a',
-                  border: '1px solid #475569',
-                  borderRadius: '0.5rem',
-                  color: 'white',
-                  outline: 'none'
-                }
-              }),
-              h('button', {
-                style: {
-                  background: '#0891b2',
-                  color: 'white',
-                  fontWeight: '600',
-                  padding: '0.75rem 2rem',
-                  borderRadius: '0.5rem',
-                  border: 'none',
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap'
-                }
-              }, 'Subscribe')
-            ),
-            h('p', { style: { color: '#9ca3af', fontSize: '0.75rem', marginTop: '0.75rem' } }, 
-              'You can unsubscribe from any newsletter at any time. We respect your inbox and will never spam you.'
+        h('p', { style: { color: '#9ca3af', fontSize: '0.75rem', marginTop: '0.75rem' } }, 
+          'You can unsubscribe from any newsletter at any time. We respect your inbox and will never spam you.'
+        )
+      )
+    )
+  );
+
+  // CONTACT PAGE
+  const contactPage = h('div', null,
+    h('div', { 
+      style: { 
+        background: 'linear-gradient(to bottom right, #0f172a, #164e63, #1e3a8a)',
+        padding: '5rem 1rem',
+        textAlign: 'center'
+      }
+    },
+      h('h1', { style: { fontSize: '3rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 'Contact Us'),
+      h('p', { style: { fontSize: '1.25rem', color: '#a5f3fc' } }, 'We\'d love to hear from you')
+    ),
+    h('div', { style: { maxWidth: '56rem', margin: '0 auto', padding: '4rem 1rem' } },
+      h('div', { style: { background: '#1e293b', borderRadius: '0.75rem', padding: '2rem', border: '1px solid #334155' } },
+        h('h2', { style: { fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '1.5rem' } }, 'Get in Touch'),
+        h('div', { style: { marginBottom: '1rem' } },
+          h('div', { style: { display: 'flex', alignItems: 'start' } },
+            h(Mail, { style: { width: '1.5rem', height: '1.5rem', color: '#22d3ee', marginTop: '0.25rem', marginRight: '0.75rem' } }),
+            h('div', null,
+              h('div', { style: { fontWeight: '600', color: 'white' } }, 'Email'),
+              h('div', { style: { color: '#9ca3af' } }, 'info@novarealms.com')
             )
           )
-        )
-      );
-
-      // CONTACT PAGE
-      const contactPage = h('div', null,
-        h('div', { 
-          style: { 
-            background: 'linear-gradient(to bottom right, #0f172a, #164e63, #1e3a8a)',
-            padding: '5rem 1rem',
-            textAlign: 'center'
-          }
-        },
-          h('h1', { style: { fontSize: '3rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 'Contact Us'),
-          h('p', { style: { fontSize: '1.25rem', color: '#a5f3fc' } }, 'We\'d love to hear from you')
         ),
-        h('div', { style: { maxWidth: '56rem', margin: '0 auto', padding: '4rem 1rem' } },
-          h('div', { style: { background: '#1e293b', borderRadius: '0.75rem', padding: '2rem', border: '1px solid #334155' } },
-            h('h2', { style: { fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '1.5rem' } }, 'Get in Touch'),
-            h('div', { style: { marginBottom: '1rem' } },
-              h('div', { style: { display: 'flex', alignItems: 'start' } },
-                h(Mail, { style: { width: '1.5rem', height: '1.5rem', color: '#22d3ee', marginTop: '0.25rem', marginRight: '0.75rem' } }),
-                h('div', null,
-                  h('div', { style: { fontWeight: '600', color: 'white' } }, 'Email'),
-                  h('div', { style: { color: '#9ca3af' } }, 'info@novarealms.com')
-                )
-              )
-            ),
-            h('div', { style: { display: 'flex', alignItems: 'start' } },
-              h(MessageSquare, { style: { width: '1.5rem', height: '1.5rem', color: '#22d3ee', marginTop: '0.25rem', marginRight: '0.75rem' } }),
-              h('div', null,
-                h('div', { style: { fontWeight: '600', color: 'white' } }, 'Response Time'),
-                h('div', { style: { color: '#9ca3af' } }, 'Within 48 hours')
-              )
-            )
+        h('div', { style: { display: 'flex', alignItems: 'start' } },
+          h(MessageSquare, { style: { width: '1.5rem', height: '1.5rem', color: '#22d3ee', marginTop: '0.25rem', marginRight: '0.75rem' } }),
+          h('div', null,
+            h('div', { style: { fontWeight: '600', color: 'white' } }, 'Response Time'),
+            h('div', { style: { color: '#9ca3af' } }, 'Within 48 hours')
           )
         )
-      );
+      )
+    )
+  );
 
-      // MAIN RENDER
-      return h('div', { style: { minHeight: '100vh', background: '#020617' } },
-        nav,
-        currentPage === 'home' && homePage,
-        currentPage === 'books' && booksPage,
-        currentPage === 'authors' && authorsPage,
-        currentPage === 'about' && aboutPage,
-        currentPage === 'newsletter' && newsletterPage,
-        currentPage === 'contact' && contactPage,
-        footer
-      );
-    }
+  // MAIN RENDER
+  return h('div', { style: { minHeight: '100vh', background: '#020617' } },
+    nav,
+    currentPage === 'home' && homePage,
+    currentPage === 'books' && booksPage,
+    currentPage === 'authors' && authorsPage,
+    currentPage === 'about' && aboutPage,
+    currentPage === 'newsletter' && newsletterPage,
+    currentPage === 'contact' && contactPage,
+    footer
+  );
+}
 
-    ReactDOM.render(h(NovaRealmsWebsite), document.getElementById('root'));
+ReactDOM.render(h(NovaRealmsWebsite), document.getElementById('root'));
 </script>
 </body>
 </html>
-
