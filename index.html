@@ -7,7 +7,7 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
 </head>
 <body style="margin: 0; padding: 0; overflow-x: hidden;">
     <div id="root"></div>
@@ -237,13 +237,6 @@
         { name: 'Harper Vaughn', genre: 'Dark Fantasy', tagline: 'Where heroes fall and shadows reign' }
       ];
 
-      const blogPosts = [
-        { title: 'Reimagining Arthur: Liam Mercer on The Hunter\'s Crown Chronicles', date: 'October 10, 2025', category: 'Author Insights' },
-        { title: 'The Making of a Monster Hunter', date: 'October 3, 2025', category: 'Writing Craft' },
-        { title: 'Welcome to Nova Realms: Our Vision', date: 'September 28, 2025', category: 'Company News' },
-        { title: 'How We Use AI in Fantasy Publishing', date: 'September 20, 2025', category: 'Industry' }
-      ];
-
       const navigateTo = (page) => {
         setCurrentPage(page);
         setMobileMenuOpen(false);
@@ -275,7 +268,7 @@
             
             h('div', { className: 'hidden md:block', style: { display: window.innerWidth >= 768 ? 'block' : 'none' } },
               h('div', { style: { display: 'flex', alignItems: 'center', gap: '1rem' } },
-                ['home', 'about', 'authors', 'books', 'newsletter', 'ai-ethics', 'blog', 'contact'].map(page =>
+                ['home', 'about', 'authors', 'books', 'newsletter', 'ai-ethics', 'contact'].map(page =>
                   h('button', {
                     key: page,
                     onClick: () => navigateTo(page),
@@ -309,7 +302,7 @@
         
         mobileMenuOpen && h('div', { className: 'md:hidden', style: { backgroundColor: 'rgba(30, 41, 59, 0.95)', backdropFilter: 'blur(8px)' } },
           h('div', { style: { padding: '0.5rem 0.5rem 0.75rem' } },
-            ['home', 'about', 'authors', 'books', 'newsletter', 'ai-ethics', 'blog', 'contact'].map(page =>
+            ['home', 'about', 'authors', 'books', 'newsletter', 'ai-ethics', 'contact'].map(page =>
               h('button', {
                 key: page,
                 onClick: () => navigateTo(page),
@@ -1040,79 +1033,6 @@
         )
       );
 
-      // BLOG PAGE
-      const blogPage = h('div', null,
-        h('div', { 
-          style: { 
-            background: 'linear-gradient(to bottom right, #0f172a, #164e63, #1e3a8a)',
-            padding: '5rem 1rem',
-            textAlign: 'center'
-          }
-        },
-          h('h1', { style: { fontSize: '3rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' } }, 'Blog & News'),
-          h('p', { style: { fontSize: '1.25rem', color: '#a5f3fc' } }, 'Updates, insights, and behind-the-scenes stories')
-        ),
-        h('div', { style: { maxWidth: '56rem', margin: '0 auto', padding: '4rem 1rem' } },
-          h('div', { style: { display: 'flex', flexDirection: 'column', gap: '2rem' } },
-            blogPosts.map((post, idx) =>
-              h('div', { 
-                key: idx,
-                style: { 
-                  background: '#1e293b',
-                  borderRadius: '0.75rem',
-                  overflow: 'hidden',
-                  border: '1px solid #334155'
-                }
-              },
-                h('div', { style: { display: 'flex', flexDirection: window.innerWidth >= 768 ? 'row' : 'column' } },
-                  h('div', { 
-                    style: { 
-                      width: window.innerWidth >= 768 ? '25%' : '100%',
-                      background: 'linear-gradient(to bottom right, #f59e0b, #ea580c)',
-                      padding: '2rem',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }
-                  },
-                    h(MessageSquare, { style: { width: '4rem', height: '4rem', color: 'white' } })
-                  ),
-                  h('div', { style: { width: window.innerWidth >= 768 ? '75%' : '100%', padding: '1.5rem' } },
-                    h('div', { style: { display: 'flex', alignItems: 'center', fontSize: '0.875rem', color: '#9ca3af', marginBottom: '0.5rem' } },
-                      h('span', { 
-                        style: { 
-                          background: '#4338ca',
-                          color: '#a5f3fc',
-                          padding: '0.25rem 0.75rem',
-                          borderRadius: '9999px',
-                          marginRight: '0.75rem'
-                        }
-                      }, post.category),
-                      h('span', null, post.date)
-                    ),
-                    h('h3', { style: { fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '0.75rem' } }, post.title),
-                    h('button', {
-                      style: {
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        color: '#22d3ee',
-                        fontWeight: '600',
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer'
-                      }
-                    },
-                      'Read More',
-                      h(ChevronRight, { style: { marginLeft: '0.25rem', width: '1.25rem', height: '1.25rem' } })
-                    )
-                  )
-                )
-              )
-            )
-          )
-        )
-      );
-
       // CONTACT PAGE
       const contactPage = h('div', null,
         h('div', { 
@@ -1157,7 +1077,6 @@
         currentPage === 'about' && aboutPage,
         currentPage === 'newsletter' && newsletterPage,
         currentPage === 'ai-ethics' && aiEthicsPage,
-        currentPage === 'blog' && blogPage,
         currentPage === 'contact' && contactPage,
         footer
       );
@@ -1167,5 +1086,3 @@
 </script>
 </body>
 </html>
-
-
